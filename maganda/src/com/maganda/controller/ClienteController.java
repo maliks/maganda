@@ -65,6 +65,8 @@ public class ClienteController {
 			cliente.setFecregistro(new java.util.Date());
 			
 			clienteManager.insertSelective(cliente);
+		}else{
+			
 		}
 		
 		listarClientes();

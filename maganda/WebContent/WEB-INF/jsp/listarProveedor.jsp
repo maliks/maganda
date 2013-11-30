@@ -1,37 +1,45 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@page pageEncoding="UTF-8"%>
-<%@page session="false" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@page session="false"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <html>
 <head>
-	<META http-equiv="Content-Type" content="text/html;charset=UTF-8">
-	<link rel="stylesheet" type="text/css" href="<c:url value="/css/app.css"/>">
-	<title>Lista de Clientes</title>
-</head>	
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/css/lista.css"/>">
+<title>Lista de Proveedores</title>
+</head>
 <body>
-	<a href="<c:url value="/registrarCliente.mgd"/>">Registrar Nuevo Cliente</a>
-	<h1>Lista de Clientes</h1>
-	<table class="container">
-		<tr>
-			<th>Codigo Cliente</th>
-			<th>Nombres</th>
-			<th>Direccion</th>
-			<th>Modificar</th>
-			<th>Eliminar</th>
-		</tr>
-		<c:forEach var="cliente" items="${lstCliente}">
-		<tr>
-		
-			<td>${cliente.idcliente}</td>
-			<td>${cliente.apepaterno} ${cliente.apematerno} ${cliente.nombres}</td>
-			<td>${cliente.direccion}</td>
-			<td><a href="<c:url value="/consultarCliente.mgd?idcliente="/>${cliente.idcliente}">Modificar</a></td>
-			<td><a href="<c:url value="/eliminarCliente.mgd?idcliente="/>${cliente.idcliente}">Eliminar</a></td>
-		</tr>
-		</c:forEach>
-	</table>
+	<div align="right" style="font-family: serif;font-size: small;"><a href="<c:url value="/registrarProveedor.mgd"/>">Registrar nuevo proveedor</a></div>
+	<div align="center">
+		<table class="container">
+			<caption>Lista de Proveedores</caption>
+			<thead>
+				<th align="center">C&oacute;digo Proveedor</th>
+				<th align="center">Tipo de Documento</th>
+				<th align="center">N&uacute;mero de Documento</th>
+				<th align="center">Nombre / Raz&oacute;n Social</th>
+				<th align="center">Direcci&oacute;n</th>
+				<th align="center">N&uacute;mero de Tel&eacute;fono</th>
+				<th align="center">Modificar</th>
+				<th align="center">Eliminar</th>
+			</thead>
+			<c:forEach var="proveedor" items="${lstProveedor}">
+				<tr>
+
+					<td align="center">${proveedor.idproveedor}</td>
+					<td align="center">${proveedor.desdocumento}</td>
+					<td align="center">${proveedor.numdocumento}</td>
+					<td align="center">${proveedor.apepaterno} ${proveedor.apematerno} ${proveedor.nombres}</td>
+					<td align="left">${proveedor.direccion}</td>
+					<td align="left">${proveedor.numtelefono}</td>
+					<td align="center"><a href="<c:url value="/consultarProveedor.mgd?idproveedor="/>${proveedor.idproveedor}">Modificar</a></td>
+					<td align="center"><a href="<c:url value="/eliminarProveedor.mgd?idproveedor="/>${proveedor.idproveedor}">Eliminar</a></td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
 </body>
 </html>
