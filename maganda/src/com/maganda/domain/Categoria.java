@@ -41,5 +41,6 @@ public class Categoria {
 
     public void setFecmodificacion(Date fecmodificacion) {
         this.fecmodificacion = fecmodificacion;
+		//prueba modificacion
     }
 }
