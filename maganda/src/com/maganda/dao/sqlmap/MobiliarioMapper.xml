@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maganda.dao.MobiliarioMapper" >
+  <resultMap id="BaseResultMap" type="com.maganda.domain.Mobiliario" >
+    <id column="IDMOBILIARIO" property="idmobiliario" jdbcType="INTEGER" />
+    <result column="NOMBRE" property="nombre" jdbcType="VARCHAR" />
+    <result column="CANTIDAD" property="cantidad" jdbcType="INTEGER" />
+    <result column="DESCRIPCION" property="descripcion" jdbcType="VARCHAR" />
+    <result column="FECCOMPRA" property="feccompra" jdbcType="DATE" />
+    <result column="MONTO" property="monto" jdbcType="DECIMAL" />
+    <result column="ESTADO" property="estado" jdbcType="CHAR" />
+    <result column="FECREGISTRO" property="fecregistro" jdbcType="TIMESTAMP" />
+    <result column="FECMODIFICACION" property="fecmodificacion" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    IDMOBILIARIO, NOMBRE, CANTIDAD, DESCRIPCION, FECCOMPRA, MONTO, ESTADO, FECREGISTRO, 
+    FECMODIFICACION
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maganda.domain.MobiliarioExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mobiliario
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from mobiliario
+    where IDMOBILIARIO = #{idmobiliario,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from mobiliario
+    where IDMOBILIARIO = #{idmobiliario,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maganda.domain.MobiliarioExample" >
+    delete from mobiliario
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maganda.domain.Mobiliario" >
+    insert into mobiliario (IDMOBILIARIO, NOMBRE, CANTIDAD, 
+      DESCRIPCION, FECCOMPRA, MONTO, 
+      ESTADO, FECREGISTRO, FECMODIFICACION
+      )
+    values (#{idmobiliario,jdbcType=INTEGER}, #{nombre,jdbcType=VARCHAR}, #{cantidad,jdbcType=INTEGER}, 
+      #{descripcion,jdbcType=VARCHAR}, #{feccompra,jdbcType=DATE}, #{monto,jdbcType=DECIMAL}, 
+      #{estado,jdbcType=CHAR}, #{fecregistro,jdbcType=TIMESTAMP}, #{fecmodificacion,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.maganda.domain.Mobiliario" >
+    insert into mobiliario
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idmobiliario != null" >
+        IDMOBILIARIO,
+      </if>
+      <if test="nombre != null" >
+        NOMBRE,
+      </if>
+      <if test="cantidad != null" >
+        CANTIDAD,
+      </if>
+      <if test="descripcion != null" >
+        DESCRIPCION,
+      </if>
+      <if test="feccompra != null" >
+        FECCOMPRA,
+      </if>
+      <if test="monto != null" >
+        MONTO,
+      </if>
+      <if test="estado != null" >
+        ESTADO,
+      </if>
+      <if test="fecregistro != null" >
+        FECREGISTRO,
+      </if>
+      <if test="fecmodificacion != null" >
+        FECMODIFICACION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idmobiliario != null" >
+        #{idmobiliario,jdbcType=INTEGER},
+      </if>
+      <if test="nombre != null" >
+        #{nombre,jdbcType=VARCHAR},
+      </if>
+      <if test="cantidad != null" >
+        #{cantidad,jdbcType=INTEGER},
+      </if>
+      <if test="descripcion != null" >
+        #{descripcion,jdbcType=VARCHAR},
+      </if>
+      <if test="feccompra != null" >
+        #{feccompra,jdbcType=DATE},
+      </if>
+      <if test="monto != null" >
+        #{monto,jdbcType=DECIMAL},
+      </if>
+      <if test="estado != null" >
+        #{estado,jdbcType=CHAR},
+      </if>
+      <if test="fecregistro != null" >
+        #{fecregistro,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fecmodificacion != null" >
+        #{fecmodificacion,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maganda.domain.MobiliarioExample" resultType="java.lang.Integer" >
+    select count(*) from mobiliario
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update mobiliario
+    <set >
+      <if test="record.idmobiliario != null" >
+        IDMOBILIARIO = #{record.idmobiliario,jdbcType=INTEGER},
+      </if>
+      <if test="record.nombre != null" >
+        NOMBRE = #{record.nombre,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cantidad != null" >
+        CANTIDAD = #{record.cantidad,jdbcType=INTEGER},
+      </if>
+      <if test="record.descripcion != null" >
+        DESCRIPCION = #{record.descripcion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feccompra != null" >
+        FECCOMPRA = #{record.feccompra,jdbcType=DATE},
+      </if>
+      <if test="record.monto != null" >
+        MONTO = #{record.monto,jdbcType=DECIMAL},
+      </if>
+      <if test="record.estado != null" >
+        ESTADO = #{record.estado,jdbcType=CHAR},
+      </if>
+      <if test="record.fecregistro != null" >
+        FECREGISTRO = #{record.fecregistro,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fecmodificacion != null" >
+        FECMODIFICACION = #{record.fecmodificacion,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update mobiliario
+    set IDMOBILIARIO = #{record.idmobiliario,jdbcType=INTEGER},
+      NOMBRE = #{record.nombre,jdbcType=VARCHAR},
+      CANTIDAD = #{record.cantidad,jdbcType=INTEGER},
+      DESCRIPCION = #{record.descripcion,jdbcType=VARCHAR},
+      FECCOMPRA = #{record.feccompra,jdbcType=DATE},
+      MONTO = #{record.monto,jdbcType=DECIMAL},
+      ESTADO = #{record.estado,jdbcType=CHAR},
+      FECREGISTRO = #{record.fecregistro,jdbcType=TIMESTAMP},
+      FECMODIFICACION = #{record.fecmodificacion,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maganda.domain.Mobiliario" >
+    update mobiliario
+    <set >
+      <if test="nombre != null" >
+        NOMBRE = #{nombre,jdbcType=VARCHAR},
+      </if>
+      <if test="cantidad != null" >
+        CANTIDAD = #{cantidad,jdbcType=INTEGER},
+      </if>
+      <if test="descripcion != null" >
+        DESCRIPCION = #{descripcion,jdbcType=VARCHAR},
+      </if>
+      <if test="feccompra != null" >
+        FECCOMPRA = #{feccompra,jdbcType=DATE},
+      </if>
+      <if test="monto != null" >
+        MONTO = #{monto,jdbcType=DECIMAL},
+      </if>
+      <if test="estado != null" >
+        ESTADO = #{estado,jdbcType=CHAR},
+      </if>
+      <if test="fecregistro != null" >
+        FECREGISTRO = #{fecregistro,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fecmodificacion != null" >
+        FECMODIFICACION = #{fecmodificacion,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where IDMOBILIARIO = #{idmobiliario,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maganda.domain.Mobiliario" >
+    update mobiliario
+    set NOMBRE = #{nombre,jdbcType=VARCHAR},
+      CANTIDAD = #{cantidad,jdbcType=INTEGER},
+      DESCRIPCION = #{descripcion,jdbcType=VARCHAR},
+      FECCOMPRA = #{feccompra,jdbcType=DATE},
+      MONTO = #{monto,jdbcType=DECIMAL},
+      ESTADO = #{estado,jdbcType=CHAR},
+      FECREGISTRO = #{fecregistro,jdbcType=TIMESTAMP},
+      FECMODIFICACION = #{fecmodificacion,jdbcType=TIMESTAMP}
+    where IDMOBILIARIO = #{idmobiliario,jdbcType=INTEGER}
+  </update>
+</mapper>
