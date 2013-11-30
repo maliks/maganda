@@ -1,10 +1,10 @@
 table {
-	width: 800px;
+	width: 100%;
 	border-collapse:collapse;
 	border:1px solid #FFCA5E;
 }
 caption {
-	font: 1.8em/1.8em Arial, Helvetica, sans-serif;
+	font: 1.8em/1.8em "Brush Script MT", cursive;
 	text-align: left;
 	text-indent: 10px;
 	background: url(../img/bg_caption.jpg) right top;
@@ -15,7 +15,7 @@ thead th {
 	background: url(../img/bg_th.jpg) no-repeat right;
 	height: 47px;
 	color: #FFFFFF;
-	font-size: 0.8em;
+	font-size: 1em;
 	font-weight: bold;
 	padding: 0px 7px;
 	margin: 20px 0px 0px;

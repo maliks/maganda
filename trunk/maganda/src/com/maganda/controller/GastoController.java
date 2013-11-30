@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.maganda.domain.Gasto;
 import com.maganda.logic.GastoManager;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Import;
 
 @Controller
 public class GastoController {

@@ -32,9 +32,8 @@
 
 </head>
 <body class="nihilo">
-	<h4>
-		<center>Registro de Mobiliarios</center>
-	</h4>
+	
+	<center>Registro de Mobiliarios</center>
 	
 	<div dojoType="dijit.form.Form" id="myForm" jsId="myForm" action="${pageContext.request.contextPath}/grabarMobiliario.mgd" method="post">
 	
