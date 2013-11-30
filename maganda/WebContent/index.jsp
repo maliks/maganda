@@ -11,5 +11,6 @@
 <a href="${pageContext.request.contextPath}/listarCliente.mgd">Mantenimiento de Clientes</a></br> 
 <a href="${pageContext.request.contextPath}/listarProveedor.mgd">Mantenimiento de Proveedores</a></br> 
 <a href="${pageContext.request.contextPath}/listarMobiliario.mgd">Mantenimiento de Mobiliarios</a></br>
+<a href="${pageContext.request.contextPath}/iniciarVenta.mgd">Iniciar Venta</a></br>
 </body>
 </html>

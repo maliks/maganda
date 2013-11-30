@@ -1,4 +1,6 @@
 package com.maganda.controller;
+
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.text.DateFormat;
@@ -18,6 +20,11 @@ public class MobiliarioController {
 	private MobiliarioManager mobiliarioManager;
 	
 	private Mobiliario mobiliario;
+	
+	@RequestMapping("/listarMobiliario")
+	public ModelAndView listarMobiliario(HttpServletRequest request, HttpServletResponse response) {
+		return new ModelAndView("listarMobiliario", "lstMobiliario", mobiliarioManager.selectByExample(null));
+	}
 	
 	@RequestMapping("/registrarMobiliario")
 	public ModelAndView registroMobiliario(HttpServletRequest request, HttpServletResponse response) {
@@ -40,6 +47,12 @@ public class MobiliarioController {
 		mobiliarioManager.insertSelective(mobiliario);
 		
 		return new ModelAndView("nuevoEmpleado", "", "");
+	}
+	
+	@RequestMapping("/eliminarMobiliario")
+	public ModelAndView eliminarMobiliario(HttpServletRequest request, HttpServletResponse response) {
+		mobiliarioManager.deleteByPrimaryKey(Integer.parseInt(request.getParameter("idmobiliario")));
+		return new ModelAndView("listarMobiliario", "lstMobiliario", mobiliarioManager.selectByExample(null));
 	}
 	
 	public MobiliarioManager getMobiliarioManager() {

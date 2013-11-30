@@ -7,8 +7,7 @@
 
 <html>
 <head>
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/css/lista.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/css/lista.css"/>">
 <title>Lista de Proveedores</title>
 </head>
 <body>

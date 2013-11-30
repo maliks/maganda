@@ -6,7 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Registro de Proveedor</title>
 
-<link rel="StyleSheet" type="text/css" href="js/dijit/themes/nihilo/nihilo.css">
+<link rel="StyleSheet" type="text/css" href="js/dijit/themes/nihilo/nihilo.css"/>
+<link rel="stylesheet" type="text/css" href="css/form.css"/>
 
 <script type="text/javascript">
 	var djConfig = {
@@ -53,8 +54,9 @@
 
 </head>
 <body class="nihilo">
-	<h4 align="center">Registro de Proveedores</h4>
-	
+	<div align="center" class="tituloFormulario">Registro de Proveedores</div>
+	<div align="center">
+	<fieldset class="estiloFieldset">	
 	<div dojoType="dijit.form.Form" id="myForm" jsId="myForm" action="${pageContext.request.contextPath}/grabarProveedor.mgd" method="post">
 	
 	<script type="dojo/method" event="onReset">
@@ -71,7 +73,7 @@
 			return true;
 	</script>
 	
-		<table width="400" border="0" align="center">
+		<table width="400" border="0" align="center" height="350px">
 			<tr>
 				<td align="right">Tipo de documento:</td>
 				<td align="left">
@@ -190,6 +192,8 @@
 			</tr>
 		</table>
 
+	</div>
+	</fieldset>
 	</div>
 </body>
 </html>

@@ -21,6 +21,8 @@ public class Detalleventa {
     private Date fecregistro;
 
     private Date fecmodificacion;
+    
+    private String nomProducto;
 
     public Integer getIdproducto() {
         return idproducto;
@@ -93,4 +95,12 @@ public class Detalleventa {
     public void setFecmodificacion(Date fecmodificacion) {
         this.fecmodificacion = fecmodificacion;
     }
+
+	public String getNomProducto() {
+		return nomProducto;
+	}
+
+	public void setNomProducto(String nomProducto) {
+		this.nomProducto = nomProducto;
+	}
 }
