@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maganda.dao.SubcategoriaMapper" >
+  <resultMap id="BaseResultMap" type="com.maganda.domain.Subcategoria" >
+    <id column="IDSUBCATEGORIA" property="idsubcategoria" jdbcType="INTEGER" />
+    <result column="IDCATEGORIA" property="idcategoria" jdbcType="INTEGER" />
+    <result column="NOMBRE" property="nombre" jdbcType="VARCHAR" />
+    <result column="FECREGISTRO" property="fecregistro" jdbcType="TIMESTAMP" />
+    <result column="FECMODIFICACION" property="fecmodificacion" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    IDSUBCATEGORIA, IDCATEGORIA, NOMBRE, FECREGISTRO, FECMODIFICACION
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maganda.domain.SubcategoriaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from subcategoria
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from subcategoria
+    where IDSUBCATEGORIA = #{idsubcategoria,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from subcategoria
+    where IDSUBCATEGORIA = #{idsubcategoria,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maganda.domain.SubcategoriaExample" >
+    delete from subcategoria
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maganda.domain.Subcategoria" >
+    insert into subcategoria (IDSUBCATEGORIA, IDCATEGORIA, NOMBRE, 
+      FECREGISTRO, FECMODIFICACION)
+    values (#{idsubcategoria,jdbcType=INTEGER}, #{idcategoria,jdbcType=INTEGER}, #{nombre,jdbcType=VARCHAR}, 
+      #{fecregistro,jdbcType=TIMESTAMP}, #{fecmodificacion,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maganda.domain.Subcategoria" >
+    insert into subcategoria
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idsubcategoria != null" >
+        IDSUBCATEGORIA,
+      </if>
+      <if test="idcategoria != null" >
+        IDCATEGORIA,
+      </if>
+      <if test="nombre != null" >
+        NOMBRE,
+      </if>
+      <if test="fecregistro != null" >
+        FECREGISTRO,
+      </if>
+      <if test="fecmodificacion != null" >
+        FECMODIFICACION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idsubcategoria != null" >
+        #{idsubcategoria,jdbcType=INTEGER},
+      </if>
+      <if test="idcategoria != null" >
+        #{idcategoria,jdbcType=INTEGER},
+      </if>
+      <if test="nombre != null" >
+        #{nombre,jdbcType=VARCHAR},
+      </if>
+      <if test="fecregistro != null" >
+        #{fecregistro,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fecmodificacion != null" >
+        #{fecmodificacion,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maganda.domain.SubcategoriaExample" resultType="java.lang.Integer" >
+    select count(*) from subcategoria
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update subcategoria
+    <set >
+      <if test="record.idsubcategoria != null" >
+        IDSUBCATEGORIA = #{record.idsubcategoria,jdbcType=INTEGER},
+      </if>
+      <if test="record.idcategoria != null" >
+        IDCATEGORIA = #{record.idcategoria,jdbcType=INTEGER},
+      </if>
+      <if test="record.nombre != null" >
+        NOMBRE = #{record.nombre,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fecregistro != null" >
+        FECREGISTRO = #{record.fecregistro,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fecmodificacion != null" >
+        FECMODIFICACION = #{record.fecmodificacion,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update subcategoria
+    set IDSUBCATEGORIA = #{record.idsubcategoria,jdbcType=INTEGER},
+      IDCATEGORIA = #{record.idcategoria,jdbcType=INTEGER},
+      NOMBRE = #{record.nombre,jdbcType=VARCHAR},
+      FECREGISTRO = #{record.fecregistro,jdbcType=TIMESTAMP},
+      FECMODIFICACION = #{record.fecmodificacion,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maganda.domain.Subcategoria" >
+    update subcategoria
+    <set >
+      <if test="idcategoria != null" >
+        IDCATEGORIA = #{idcategoria,jdbcType=INTEGER},
+      </if>
+      <if test="nombre != null" >
+        NOMBRE = #{nombre,jdbcType=VARCHAR},
+      </if>
+      <if test="fecregistro != null" >
+        FECREGISTRO = #{fecregistro,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fecmodificacion != null" >
+        FECMODIFICACION = #{fecmodificacion,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where IDSUBCATEGORIA = #{idsubcategoria,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maganda.domain.Subcategoria" >
+    update subcategoria
+    set IDCATEGORIA = #{idcategoria,jdbcType=INTEGER},
+      NOMBRE = #{nombre,jdbcType=VARCHAR},
+      FECREGISTRO = #{fecregistro,jdbcType=TIMESTAMP},
+      FECMODIFICACION = #{fecmodificacion,jdbcType=TIMESTAMP}
+    where IDSUBCATEGORIA = #{idsubcategoria,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.maganda.domain.Categoria" alias="Categoria"/>
+		<typeAlias type="com.maganda.domain.CategoriaExample" alias="CategoriaExample"/>
+		<typeAlias type="com.maganda.domain.Cliente" alias="Cliente"/>
+		<typeAlias type="com.maganda.domain.ClienteExample" alias="ClienteExample"/>
+		<typeAlias type="com.maganda.domain.Color" alias="Color"/>
+		<typeAlias type="com.maganda.domain.ColorExample" alias="ColorExample"/>
+		<typeAlias type="com.maganda.domain.Compra" alias="Compra"/>
+		<typeAlias type="com.maganda.domain.CompraExample" alias="CompraExample"/>
+		<typeAlias type="com.maganda.domain.Detallecompra" alias="Detallecompra"/>
+		<typeAlias type="com.maganda.domain.DetallecompraExample" alias="DetallecompraExample"/>
+		<typeAlias type="com.maganda.domain.Detalleventa" alias="Detalleventa"/>
+		<typeAlias type="com.maganda.domain.DetalleventaExample" alias="DetalleventaExample"/>
+		<typeAlias type="com.maganda.domain.Documento" alias="Documento"/>
+		<typeAlias type="com.maganda.domain.DocumentoExample" alias="DocumentoExample"/>
+		<typeAlias type="com.maganda.domain.Empleado" alias="Empleado"/>
+		<typeAlias type="com.maganda.domain.EmpleadoExample" alias="EmpleadoExample"/>
+		<typeAlias type="com.maganda.domain.Gasto" alias="Gasto"/>
+		<typeAlias type="com.maganda.domain.GastoExample" alias="GastoExample"/>
+		<typeAlias type="com.maganda.domain.Marca" alias="Marca"/>
+		<typeAlias type="com.maganda.domain.MarcaExample" alias="MarcaExample"/>
+		<typeAlias type="com.maganda.domain.Mobiliario" alias="Mobiliario"/>
+		<typeAlias type="com.maganda.domain.MobiliarioExample" alias="MobiliarioExample"/>
+		<typeAlias type="com.maganda.domain.Persona" alias="Persona"/>
+		<typeAlias type="com.maganda.domain.PersonaExample" alias="PersonaExample"/>
+		<typeAlias type="com.maganda.domain.Producto" alias="Producto"/>
+		<typeAlias type="com.maganda.domain.ProductoExample" alias="ProductoExample"/>
+		<typeAlias type="com.maganda.domain.Proveedor" alias="Proveedor"/>
+		<typeAlias type="com.maganda.domain.ProveedorExample" alias="ProveedorExample"/>
+		<typeAlias type="com.maganda.domain.Rol" alias="Rol"/>
+		<typeAlias type="com.maganda.domain.RolExample" alias="RolExample"/>
+		<typeAlias type="com.maganda.domain.Subcategoria" alias="Subcategoria"/>
+		<typeAlias type="com.maganda.domain.SubcategoriaExample" alias="SubcategoriaExample"/>
+		<typeAlias type="com.maganda.domain.Sueldo" alias="Sueldo"/>
+		<typeAlias type="com.maganda.domain.SueldoExample" alias="SueldoExample"/>
+		<typeAlias type="com.maganda.domain.Usuario" alias="Usuario"/>
+		<typeAlias type="com.maganda.domain.UsuarioExample" alias="UsuarioExample"/>
+		<typeAlias type="com.maganda.domain.Venta" alias="Venta"/>
+		<typeAlias type="com.maganda.domain.VentaExample" alias="VentaExample"/>
+	</typeAliases>
+    <mappers>
+        <mapper resource="com/maganda/dao/sqlmap/CategoriaMapper.xml" />
+		<mapper resource="com/maganda/dao/sqlmap/ClienteMapper.xml" />
+		<mapper resource="com/maganda/dao/sqlmap/ColorMapper.xml" />
+		<mapper resource="com/maganda/dao/sqlmap/CompraMapper.xml" />
+		<mapper resource="com/maganda/dao/sqlmap/DetallecompraMapper.xml" />
+		<mapper resource="com/maganda/dao/sqlmap/DetalleventaMapper.xml" />
+		<mapper resource="com/maganda/dao/sqlmap/DocumentoMapper.xml" />
+		<mapper resource="com/maganda/dao/sqlmap/EmpleadoMapper.xml" />
+		<mapper resource="com/maganda/dao/sqlmap/GastoMapper.xml" />
+		<mapper resource="com/maganda/dao/sqlmap/MarcaMapper.xml" />
+		<mapper resource="com/maganda/dao/sqlmap/MobiliarioMapper.xml" />
+		<mapper resource="com/maganda/dao/sqlmap/PersonaMapper.xml" />
+		<mapper resource="com/maganda/dao/sqlmap/ProductoMapper.xml" />
+		<mapper resource="com/maganda/dao/sqlmap/ProveedorMapper.xml" />
+		<mapper resource="com/maganda/dao/sqlmap/RolMapper.xml" />
+		<mapper resource="com/maganda/dao/sqlmap/SubcategoriaMapper.xml" />
+		<mapper resource="com/maganda/dao/sqlmap/SueldoMapper.xml" />
+		<mapper resource="com/maganda/dao/sqlmap/UsuarioMapper.xml" />
+		<mapper resource="com/maganda/dao/sqlmap/VentaMapper.xml" />
+    </mappers>
+</configuration>

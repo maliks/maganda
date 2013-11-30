@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maganda.dao.DetalleventaMapper" >
+  <resultMap id="BaseResultMap" type="com.maganda.domain.Detalleventa" >
+    <result column="IDPRODUCTO" property="idproducto" jdbcType="INTEGER" />
+    <result column="IDDOCUMENTO" property="iddocumento" jdbcType="INTEGER" />
+    <result column="NUMVENTA" property="numventa" jdbcType="INTEGER" />
+    <result column="CANTIDAD" property="cantidad" jdbcType="INTEGER" />
+    <result column="MONTO" property="monto" jdbcType="DECIMAL" />
+    <result column="DESCUENTO" property="descuento" jdbcType="DECIMAL" />
+    <result column="ESTPRODUCTO" property="estproducto" jdbcType="CHAR" />
+    <result column="FECREGISTRO" property="fecregistro" jdbcType="TIMESTAMP" />
+    <result column="FECMODIFICACION" property="fecmodificacion" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    IDPRODUCTO, IDDOCUMENTO, NUMVENTA, CANTIDAD, MONTO, DESCUENTO, ESTPRODUCTO, FECREGISTRO, 
+    FECMODIFICACION
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maganda.domain.DetalleventaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from detalleventa
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.maganda.domain.DetalleventaExample" >
+    delete from detalleventa
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maganda.domain.Detalleventa" >
+    insert into detalleventa (IDPRODUCTO, IDDOCUMENTO, NUMVENTA, 
+      CANTIDAD, MONTO, DESCUENTO, 
+      ESTPRODUCTO, FECREGISTRO, FECMODIFICACION
+      )
+    values (#{idproducto,jdbcType=INTEGER}, #{iddocumento,jdbcType=INTEGER}, #{numventa,jdbcType=INTEGER}, 
+      #{cantidad,jdbcType=INTEGER}, #{monto,jdbcType=DECIMAL}, #{descuento,jdbcType=DECIMAL}, 
+      #{estproducto,jdbcType=CHAR}, #{fecregistro,jdbcType=TIMESTAMP}, #{fecmodificacion,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.maganda.domain.Detalleventa" >
+    insert into detalleventa
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idproducto != null" >
+        IDPRODUCTO,
+      </if>
+      <if test="iddocumento != null" >
+        IDDOCUMENTO,
+      </if>
+      <if test="numventa != null" >
+        NUMVENTA,
+      </if>
+      <if test="cantidad != null" >
+        CANTIDAD,
+      </if>
+      <if test="monto != null" >
+        MONTO,
+      </if>
+      <if test="descuento != null" >
+        DESCUENTO,
+      </if>
+      <if test="estproducto != null" >
+        ESTPRODUCTO,
+      </if>
+      <if test="fecregistro != null" >
+        FECREGISTRO,
+      </if>
+      <if test="fecmodificacion != null" >
+        FECMODIFICACION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idproducto != null" >
+        #{idproducto,jdbcType=INTEGER},
+      </if>
+      <if test="iddocumento != null" >
+        #{iddocumento,jdbcType=INTEGER},
+      </if>
+      <if test="numventa != null" >
+        #{numventa,jdbcType=INTEGER},
+      </if>
+      <if test="cantidad != null" >
+        #{cantidad,jdbcType=INTEGER},
+      </if>
+      <if test="monto != null" >
+        #{monto,jdbcType=DECIMAL},
+      </if>
+      <if test="descuento != null" >
+        #{descuento,jdbcType=DECIMAL},
+      </if>
+      <if test="estproducto != null" >
+        #{estproducto,jdbcType=CHAR},
+      </if>
+      <if test="fecregistro != null" >
+        #{fecregistro,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fecmodificacion != null" >
+        #{fecmodificacion,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maganda.domain.DetalleventaExample" resultType="java.lang.Integer" >
+    select count(*) from detalleventa
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update detalleventa
+    <set >
+      <if test="record.idproducto != null" >
+        IDPRODUCTO = #{record.idproducto,jdbcType=INTEGER},
+      </if>
+      <if test="record.iddocumento != null" >
+        IDDOCUMENTO = #{record.iddocumento,jdbcType=INTEGER},
+      </if>
+      <if test="record.numventa != null" >
+        NUMVENTA = #{record.numventa,jdbcType=INTEGER},
+      </if>
+      <if test="record.cantidad != null" >
+        CANTIDAD = #{record.cantidad,jdbcType=INTEGER},
+      </if>
+      <if test="record.monto != null" >
+        MONTO = #{record.monto,jdbcType=DECIMAL},
+      </if>
+      <if test="record.descuento != null" >
+        DESCUENTO = #{record.descuento,jdbcType=DECIMAL},
+      </if>
+      <if test="record.estproducto != null" >
+        ESTPRODUCTO = #{record.estproducto,jdbcType=CHAR},
+      </if>
+      <if test="record.fecregistro != null" >
+        FECREGISTRO = #{record.fecregistro,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fecmodificacion != null" >
+        FECMODIFICACION = #{record.fecmodificacion,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update detalleventa
+    set IDPRODUCTO = #{record.idproducto,jdbcType=INTEGER},
+      IDDOCUMENTO = #{record.iddocumento,jdbcType=INTEGER},
+      NUMVENTA = #{record.numventa,jdbcType=INTEGER},
+      CANTIDAD = #{record.cantidad,jdbcType=INTEGER},
+      MONTO = #{record.monto,jdbcType=DECIMAL},
+      DESCUENTO = #{record.descuento,jdbcType=DECIMAL},
+      ESTPRODUCTO = #{record.estproducto,jdbcType=CHAR},
+      FECREGISTRO = #{record.fecregistro,jdbcType=TIMESTAMP},
+      FECMODIFICACION = #{record.fecmodificacion,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maganda.dao.PersonaMapper" >
+  <resultMap id="BaseResultMap" type="com.maganda.domain.Persona" >
+    <id column="IDDOCUMENTO" property="iddocumento" jdbcType="INTEGER" />
+    <id column="NUMDOCUMENTO" property="numdocumento" jdbcType="VARCHAR" />
+    <result column="TIPPERSONA" property="tippersona" jdbcType="CHAR" />
+    <result column="APEPATERNO" property="apepaterno" jdbcType="VARCHAR" />
+    <result column="APEMATERNO" property="apematerno" jdbcType="VARCHAR" />
+    <result column="NOMBRES" property="nombres" jdbcType="VARCHAR" />
+    <result column="FECCREACION" property="feccreacion" jdbcType="TIMESTAMP" />
+    <result column="FECMODIFICACION" property="fecmodificacion" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    IDDOCUMENTO, NUMDOCUMENTO, TIPPERSONA, APEPATERNO, APEMATERNO, NOMBRES, FECCREACION, 
+    FECMODIFICACION
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maganda.domain.PersonaExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from persona
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from persona
+    where IDDOCUMENTO = #{iddocumento,jdbcType=INTEGER}
+      and NUMDOCUMENTO = #{numdocumento,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from persona
+    where IDDOCUMENTO = #{iddocumento,jdbcType=INTEGER}
+      and NUMDOCUMENTO = #{numdocumento,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maganda.domain.PersonaExample" >
+    delete from persona
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maganda.domain.Persona" >
+    insert into persona (IDDOCUMENTO, NUMDOCUMENTO, TIPPERSONA, 
+      APEPATERNO, APEMATERNO, NOMBRES, 
+      FECCREACION, FECMODIFICACION)
+    values (#{iddocumento,jdbcType=INTEGER}, #{numdocumento,jdbcType=VARCHAR}, #{tippersona,jdbcType=CHAR}, 
+      #{apepaterno,jdbcType=VARCHAR}, #{apematerno,jdbcType=VARCHAR}, #{nombres,jdbcType=VARCHAR}, 
+      #{feccreacion,jdbcType=TIMESTAMP}, #{fecmodificacion,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.maganda.domain.Persona" >
+    insert into persona
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iddocumento != null" >
+        IDDOCUMENTO,
+      </if>
+      <if test="numdocumento != null" >
+        NUMDOCUMENTO,
+      </if>
+      <if test="tippersona != null" >
+        TIPPERSONA,
+      </if>
+      <if test="apepaterno != null" >
+        APEPATERNO,
+      </if>
+      <if test="apematerno != null" >
+        APEMATERNO,
+      </if>
+      <if test="nombres != null" >
+        NOMBRES,
+      </if>
+      <if test="feccreacion != null" >
+        FECCREACION,
+      </if>
+      <if test="fecmodificacion != null" >
+        FECMODIFICACION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iddocumento != null" >
+        #{iddocumento,jdbcType=INTEGER},
+      </if>
+      <if test="numdocumento != null" >
+        #{numdocumento,jdbcType=VARCHAR},
+      </if>
+      <if test="tippersona != null" >
+        #{tippersona,jdbcType=CHAR},
+      </if>
+      <if test="apepaterno != null" >
+        #{apepaterno,jdbcType=VARCHAR},
+      </if>
+      <if test="apematerno != null" >
+        #{apematerno,jdbcType=VARCHAR},
+      </if>
+      <if test="nombres != null" >
+        #{nombres,jdbcType=VARCHAR},
+      </if>
+      <if test="feccreacion != null" >
+        #{feccreacion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fecmodificacion != null" >
+        #{fecmodificacion,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maganda.domain.PersonaExample" resultType="java.lang.Integer" >
+    select count(*) from persona
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update persona
+    <set >
+      <if test="record.iddocumento != null" >
+        IDDOCUMENTO = #{record.iddocumento,jdbcType=INTEGER},
+      </if>
+      <if test="record.numdocumento != null" >
+        NUMDOCUMENTO = #{record.numdocumento,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tippersona != null" >
+        TIPPERSONA = #{record.tippersona,jdbcType=CHAR},
+      </if>
+      <if test="record.apepaterno != null" >
+        APEPATERNO = #{record.apepaterno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.apematerno != null" >
+        APEMATERNO = #{record.apematerno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nombres != null" >
+        NOMBRES = #{record.nombres,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feccreacion != null" >
+        FECCREACION = #{record.feccreacion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fecmodificacion != null" >
+        FECMODIFICACION = #{record.fecmodificacion,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update persona
+    set IDDOCUMENTO = #{record.iddocumento,jdbcType=INTEGER},
+      NUMDOCUMENTO = #{record.numdocumento,jdbcType=VARCHAR},
+      TIPPERSONA = #{record.tippersona,jdbcType=CHAR},
+      APEPATERNO = #{record.apepaterno,jdbcType=VARCHAR},
+      APEMATERNO = #{record.apematerno,jdbcType=VARCHAR},
+      NOMBRES = #{record.nombres,jdbcType=VARCHAR},
+      FECCREACION = #{record.feccreacion,jdbcType=TIMESTAMP},
+      FECMODIFICACION = #{record.fecmodificacion,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maganda.domain.Persona" >
+    update persona
+    <set >
+      <if test="tippersona != null" >
+        TIPPERSONA = #{tippersona,jdbcType=CHAR},
+      </if>
+      <if test="apepaterno != null" >
+        APEPATERNO = #{apepaterno,jdbcType=VARCHAR},
+      </if>
+      <if test="apematerno != null" >
+        APEMATERNO = #{apematerno,jdbcType=VARCHAR},
+      </if>
+      <if test="nombres != null" >
+        NOMBRES = #{nombres,jdbcType=VARCHAR},
+      </if>
+      <if test="feccreacion != null" >
+        FECCREACION = #{feccreacion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fecmodificacion != null" >
+        FECMODIFICACION = #{fecmodificacion,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where IDDOCUMENTO = #{iddocumento,jdbcType=INTEGER}
+      and NUMDOCUMENTO = #{numdocumento,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maganda.domain.Persona" >
+    update persona
+    set TIPPERSONA = #{tippersona,jdbcType=CHAR},
+      APEPATERNO = #{apepaterno,jdbcType=VARCHAR},
+      APEMATERNO = #{apematerno,jdbcType=VARCHAR},
+      NOMBRES = #{nombres,jdbcType=VARCHAR},
+      FECCREACION = #{feccreacion,jdbcType=TIMESTAMP},
+      FECMODIFICACION = #{fecmodificacion,jdbcType=TIMESTAMP}
+    where IDDOCUMENTO = #{iddocumento,jdbcType=INTEGER}
+      and NUMDOCUMENTO = #{numdocumento,jdbcType=VARCHAR}
+  </update>
+</mapper>

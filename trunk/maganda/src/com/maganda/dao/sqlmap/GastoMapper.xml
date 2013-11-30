@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maganda.dao.GastoMapper" >
+  <resultMap id="BaseResultMap" type="com.maganda.domain.Gasto" >
+    <id column="IDGASTO" property="idgasto" jdbcType="INTEGER" />
+    <result column="MONTO" property="monto" jdbcType="DECIMAL" />
+    <result column="DESCRIPCION" property="descripcion" jdbcType="VARCHAR" />
+    <result column="FECGASTO" property="fecgasto" jdbcType="DATE" />
+    <result column="FECREGISTRO" property="fecregistro" jdbcType="TIMESTAMP" />
+    <result column="FECMODIFICACION" property="fecmodificacion" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    IDGASTO, MONTO, DESCRIPCION, FECGASTO, FECREGISTRO, FECMODIFICACION
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maganda.domain.GastoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gasto
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from gasto
+    where IDGASTO = #{idgasto,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gasto
+    where IDGASTO = #{idgasto,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.maganda.domain.GastoExample" >
+    delete from gasto
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.maganda.domain.Gasto" >
+    insert into gasto (IDGASTO, MONTO, DESCRIPCION, 
+      FECGASTO, FECREGISTRO, FECMODIFICACION
+      )
+    values (#{idgasto,jdbcType=INTEGER}, #{monto,jdbcType=DECIMAL}, #{descripcion,jdbcType=VARCHAR}, 
+      #{fecgasto,jdbcType=DATE}, #{fecregistro,jdbcType=TIMESTAMP}, #{fecmodificacion,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.maganda.domain.Gasto" >
+    insert into gasto
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idgasto != null" >
+        IDGASTO,
+      </if>
+      <if test="monto != null" >
+        MONTO,
+      </if>
+      <if test="descripcion != null" >
+        DESCRIPCION,
+      </if>
+      <if test="fecgasto != null" >
+        FECGASTO,
+      </if>
+      <if test="fecregistro != null" >
+        FECREGISTRO,
+      </if>
+      <if test="fecmodificacion != null" >
+        FECMODIFICACION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idgasto != null" >
+        #{idgasto,jdbcType=INTEGER},
+      </if>
+      <if test="monto != null" >
+        #{monto,jdbcType=DECIMAL},
+      </if>
+      <if test="descripcion != null" >
+        #{descripcion,jdbcType=VARCHAR},
+      </if>
+      <if test="fecgasto != null" >
+        #{fecgasto,jdbcType=DATE},
+      </if>
+      <if test="fecregistro != null" >
+        #{fecregistro,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fecmodificacion != null" >
+        #{fecmodificacion,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.maganda.domain.GastoExample" resultType="java.lang.Integer" >
+    select count(*) from gasto
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update gasto
+    <set >
+      <if test="record.idgasto != null" >
+        IDGASTO = #{record.idgasto,jdbcType=INTEGER},
+      </if>
+      <if test="record.monto != null" >
+        MONTO = #{record.monto,jdbcType=DECIMAL},
+      </if>
+      <if test="record.descripcion != null" >
+        DESCRIPCION = #{record.descripcion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fecgasto != null" >
+        FECGASTO = #{record.fecgasto,jdbcType=DATE},
+      </if>
+      <if test="record.fecregistro != null" >
+        FECREGISTRO = #{record.fecregistro,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fecmodificacion != null" >
+        FECMODIFICACION = #{record.fecmodificacion,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update gasto
+    set IDGASTO = #{record.idgasto,jdbcType=INTEGER},
+      MONTO = #{record.monto,jdbcType=DECIMAL},
+      DESCRIPCION = #{record.descripcion,jdbcType=VARCHAR},
+      FECGASTO = #{record.fecgasto,jdbcType=DATE},
+      FECREGISTRO = #{record.fecregistro,jdbcType=TIMESTAMP},
+      FECMODIFICACION = #{record.fecmodificacion,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.maganda.domain.Gasto" >
+    update gasto
+    <set >
+      <if test="monto != null" >
+        MONTO = #{monto,jdbcType=DECIMAL},
+      </if>
+      <if test="descripcion != null" >
+        DESCRIPCION = #{descripcion,jdbcType=VARCHAR},
+      </if>
+      <if test="fecgasto != null" >
+        FECGASTO = #{fecgasto,jdbcType=DATE},
+      </if>
+      <if test="fecregistro != null" >
+        FECREGISTRO = #{fecregistro,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fecmodificacion != null" >
+        FECMODIFICACION = #{fecmodificacion,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where IDGASTO = #{idgasto,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.maganda.domain.Gasto" >
+    update gasto
+    set MONTO = #{monto,jdbcType=DECIMAL},
+      DESCRIPCION = #{descripcion,jdbcType=VARCHAR},
+      FECGASTO = #{fecgasto,jdbcType=DATE},
+      FECREGISTRO = #{fecregistro,jdbcType=TIMESTAMP},
+      FECMODIFICACION = #{fecmodificacion,jdbcType=TIMESTAMP}
+    where IDGASTO = #{idgasto,jdbcType=INTEGER}
+  </update>
+</mapper>

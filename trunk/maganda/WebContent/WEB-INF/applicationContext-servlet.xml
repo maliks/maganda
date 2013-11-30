@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<context:component-scan base-package="com.maganda.controller" />
+
+	<mvc:annotation-driven />
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost/maganda" />
+		<property name="username" value="root" />
+		<property name="password" value="123456" />
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="/WEB-INF/sqlmap-config.xml" />
+	</bean>
+
+	<bean id="categoriaMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.CategoriaMapper" />
+	</bean>
+	<bean id="clienteMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.ClienteMapper" />
+	</bean>
+	<bean id="colorMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.ColorMapper" />
+	</bean>
+	<bean id="compraMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.CompraMapper" />
+	</bean>
+	<bean id="detallecompraMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.DetallecompraMapper" />
+	</bean>
+	<bean id="detalleventaMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.DetalleventaMapper" />
+	</bean>
+	<bean id="documentoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.DocumentoMapper" />
+	</bean>
+	<bean id="empleadoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.EmpleadoMapper" />
+	</bean>
+	<bean id="gastoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.GastoMapper" />
+	</bean>
+	<bean id="marcaMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.MarcaMapper" />
+	</bean>
+	<bean id="mobiliarioMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.MobiliarioMapper" />
+	</bean>
+	<bean id="personaMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.PersonaMapper" />
+	</bean>
+	<bean id="productoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.ProductoMapper" />
+	</bean>
+	<bean id="proveedorMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.ProveedorMapper" />
+	</bean>
+	<bean id="rolMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.RolMapper" />
+	</bean>
+	<bean id="subcategoriaMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.SubcategoriaMapper" />
+	</bean>
+	<bean id="sueldoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.SueldoMapper" />
+	</bean>
+	<bean id="usuarioMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.UsuarioMapper" />
+	</bean>
+	<bean id="ventaMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="com.maganda.dao.VentaMapper" />
+	</bean>
+
+	<bean id="categoriaManager" class="com.maganda.logic.CategoriaManager">
+		<property name="categoriaMapper" ref="categoriaMapper" />
+	</bean>
+	<bean id="clienteManager" class="com.maganda.logic.ClienteManager">
+		<property name="clienteMapper" ref="clienteMapper" />
+	</bean>
+	<bean id="colorManager" class="com.maganda.logic.ColorManager">
+		<property name="colorMapper" ref="colorMapper" />
+	</bean>
+	<bean id="compraManager" class="com.maganda.logic.CompraManager">
+		<property name="compraMapper" ref="compraMapper" />
+	</bean>
+	<bean id="detallecompraManager" class="com.maganda.logic.DetallecompraManager">
+		<property name="detallecompraMapper" ref="detallecompraMapper" />
+	</bean>
+	<bean id="detalleventaManager" class="com.maganda.logic.DetalleventaManager">
+		<property name="detalleventaMapper" ref="detalleventaMapper" />
+	</bean>
+	<bean id="documentoManager" class="com.maganda.logic.DocumentoManager">
+		<property name="documentoMapper" ref="documentoMapper" />
+	</bean>
+	<bean id="empleadoManager" class="com.maganda.logic.EmpleadoManager">
+		<property name="empleadoMapper" ref="empleadoMapper" />
+	</bean>
+	<bean id="gastoManager" class="com.maganda.logic.GastoManager">
+		<property name="gastoMapper" ref="gastoMapper" />
+	</bean>
+	<bean id="marcaManager" class="com.maganda.logic.MarcaManager">
+		<property name="marcaMapper" ref="marcaMapper" />
+	</bean>
+	<bean id="mobiliarioManager" class="com.maganda.logic.MobiliarioManager">
+		<property name="mobiliarioMapper" ref="mobiliarioMapper" />
+	</bean>
+	<bean id="personaManager" class="com.maganda.logic.PersonaManager">
+		<property name="personaMapper" ref="personaMapper" />
+	</bean>
+	<bean id="productoManager" class="com.maganda.logic.ProductoManager">
+		<property name="productoMapper" ref="productoMapper" />
+	</bean>
+	<bean id="proveedorManager" class="com.maganda.logic.ProveedorManager">
+		<property name="proveedorMapper" ref="proveedorMapper" />
+	</bean>
+	<bean id="rolManager" class="com.maganda.logic.RolManager">
+		<property name="rolMapper" ref="rolMapper" />
+	</bean>
+	<bean id="subcategoriaManager" class="com.maganda.logic.SubcategoriaManager">
+		<property name="subcategoriaMapper" ref="subcategoriaMapper" />
+	</bean>
+	<bean id="sueldoManager" class="com.maganda.logic.SueldoManager">
+		<property name="sueldoMapper" ref="sueldoMapper" />
+	</bean>
+	<bean id="usuarioManager" class="com.maganda.logic.UsuarioManager">
+		<property name="usuarioMapper" ref="usuarioMapper" />
+	</bean>
+	<bean id="ventaManager" class="com.maganda.logic.VentaManager">
+		<property name="ventaMapper" ref="ventaMapper" />
+	</bean>
+
+	<aop:config>
+		<aop:advisor pointcut="execution(* *..CategoriaManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+		<aop:advisor pointcut="execution(* *..ClienteManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+		<aop:advisor pointcut="execution(* *..ColorManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+		<aop:advisor pointcut="execution(* *..CompraManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+		<aop:advisor pointcut="execution(* *..DetallecompraManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+		<aop:advisor pointcut="execution(* *..DetalleventaManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+		<aop:advisor pointcut="execution(* *..DocumentoManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+		<aop:advisor pointcut="execution(* *..EmpleadoManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+		<aop:advisor pointcut="execution(* *..GastoManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+		<aop:advisor pointcut="execution(* *..MarcaManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+		<aop:advisor pointcut="execution(* *..MobiliarioManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+		<aop:advisor pointcut="execution(* *..PersonaManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+		<aop:advisor pointcut="execution(* *..ProductoManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+		<aop:advisor pointcut="execution(* *..ProveedorManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+		<aop:advisor pointcut="execution(* *..RolManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+		<aop:advisor pointcut="execution(* *..SubcategoriaManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+		<aop:advisor pointcut="execution(* *..SueldoManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+		<aop:advisor pointcut="execution(* *..UsuarioManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+		<aop:advisor pointcut="execution(* *..VentaManager.*(..))"
+			advice-ref="simpleTxAdvice" />
+	</aop:config>
+
+	<tx:advice id="simpleTxAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="insert*" />
+			<tx:method name="update*" />
+			<tx:method name="create*" />
+			<tx:method name="delete*" />
+			<tx:method name="*" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+</beans>
