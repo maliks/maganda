@@ -103,4 +103,14 @@ public class Detalleventa {
 	public void setNomProducto(String nomProducto) {
 		this.nomProducto = nomProducto;
 	}
+
+	@Override
+	public String toString() {
+		return "Detalleventa [idproducto=" + idproducto + ", iddocumento="
+				+ iddocumento + ", numventa=" + numventa + ", cantidad="
+				+ cantidad + ", monto=" + monto + ", descuento=" + descuento
+				+ ", estproducto=" + estproducto + ", fecregistro="
+				+ fecregistro + ", fecmodificacion=" + fecmodificacion
+				+ ", nomProducto=" + nomProducto + "]";
+	}
 }
