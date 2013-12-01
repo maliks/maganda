@@ -50,11 +50,11 @@
 
 	<script type="dojo/method" event="onSubmit">
 			if (this.validate()) {
-				if(document.getElementById("txtMonto").value<=0){
-					alert("El precio del producto debe ser mayor a 0");
+				if(document.getElementById('txtMonto').value*1 <= 0){
+					alert('El precio del producto debe ser mayor a 0');
 					return false;
 				}else{
-					if(document.getElementById("txtMonto").value<=document.getElementById("txtDescuento").value){
+					if(document.getElementById('txtMonto').value*1 <= document.getElementById('txtDescuento').value*1){
 						alert("El descuento debe ser menor que el precio del producto");
 						return false;
 					}else{
@@ -62,7 +62,6 @@
 					}
 				}
 	
-				//return true;
 			} else {
 				alert('Por favor, ingrese los datos solicitados');
 				return false;

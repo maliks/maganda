@@ -50,10 +50,10 @@
 			<div class="tituloFormulario">Venta de Productos</div>
 			<div dojoType="dijit.form.Form" id="myForm" jsId="myForm" action="${pageContext.request.contextPath}/realizarVenta.mgd" method="post">
 				<script type="dojo/method" event="onSubmit">
-					if (this.validate()) {
+					if (this.validate()<c:if test="${empty venta.lstDetalleVenta}"> && false</c:if>) {
 						return true;
 					} else {
-						alert('Por favor, ingrese los datos solicitados');
+						alert('Por favor, ingrese los datos solicitados. Agregue al menos un producto');
 						return false;
 					}
 					return true;
@@ -120,7 +120,7 @@
 					<th align="center">Sub - Total</th>
 					<th align="center">Quitar</th>
 				</thead>
-				<c:forEach var="carrito" items="${venta.carritoVenta}">
+				<c:forEach var="carrito" items="${venta.lstDetalleVenta}">
 					<tr>
 						<td align="left">${carrito.nomProducto}</td>
 						<td align="right">${carrito.cantidad}</td>
