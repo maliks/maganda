@@ -1,0 +1,12 @@
+.tituloFormulario {
+	font-family:"Brush Script MT", cursive;
+	text-align: center;
+	font-size: 50px;
+	color: #FFAA00;
+}
+
+.estiloFieldset {
+	border:1px solid orange;
+	width: 600px;
+	text-align: left;
+}
