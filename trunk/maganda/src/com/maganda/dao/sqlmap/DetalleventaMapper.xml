@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.maganda.domain.Detalleventa" >
     <result column="IDPRODUCTO" property="idproducto" jdbcType="INTEGER" />
     <result column="IDDOCUMENTO" property="iddocumento" jdbcType="INTEGER" />
-    <result column="NUMVENTA" property="numventa" jdbcType="INTEGER" />
+    <result column="NUMVENTA" property="numventa" jdbcType="VARCHAR" />
     <result column="CANTIDAD" property="cantidad" jdbcType="INTEGER" />
     <result column="MONTO" property="monto" jdbcType="DECIMAL" />
     <result column="DESCUENTO" property="descuento" jdbcType="DECIMAL" />
@@ -99,7 +99,7 @@
       CANTIDAD, MONTO, DESCUENTO, 
       ESTPRODUCTO, FECREGISTRO, FECMODIFICACION
       )
-    values (#{idproducto,jdbcType=INTEGER}, #{iddocumento,jdbcType=INTEGER}, #{numventa,jdbcType=INTEGER}, 
+    values (#{idproducto,jdbcType=INTEGER}, #{iddocumento,jdbcType=INTEGER}, #{numventa,jdbcType=VARCHAR}, 
       #{cantidad,jdbcType=INTEGER}, #{monto,jdbcType=DECIMAL}, #{descuento,jdbcType=DECIMAL}, 
       #{estproducto,jdbcType=CHAR}, #{fecregistro,jdbcType=TIMESTAMP}, #{fecmodificacion,jdbcType=TIMESTAMP}
       )
@@ -143,7 +143,7 @@
         #{iddocumento,jdbcType=INTEGER},
       </if>
       <if test="numventa != null" >
-        #{numventa,jdbcType=INTEGER},
+        #{numventa,jdbcType=VARCHAR},
       </if>
       <if test="cantidad != null" >
         #{cantidad,jdbcType=INTEGER},
@@ -181,7 +181,7 @@
         IDDOCUMENTO = #{record.iddocumento,jdbcType=INTEGER},
       </if>
       <if test="record.numventa != null" >
-        NUMVENTA = #{record.numventa,jdbcType=INTEGER},
+        NUMVENTA = #{record.numventa,jdbcType=VARCHAR},
       </if>
       <if test="record.cantidad != null" >
         CANTIDAD = #{record.cantidad,jdbcType=INTEGER},
@@ -210,7 +210,7 @@
     update detalleventa
     set IDPRODUCTO = #{record.idproducto,jdbcType=INTEGER},
       IDDOCUMENTO = #{record.iddocumento,jdbcType=INTEGER},
-      NUMVENTA = #{record.numventa,jdbcType=INTEGER},
+      NUMVENTA = #{record.numventa,jdbcType=VARCHAR},
       CANTIDAD = #{record.cantidad,jdbcType=INTEGER},
       MONTO = #{record.monto,jdbcType=DECIMAL},
       DESCUENTO = #{record.descuento,jdbcType=DECIMAL},

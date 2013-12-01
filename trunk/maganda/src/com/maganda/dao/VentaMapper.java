@@ -10,7 +10,7 @@ public interface VentaMapper {
 
     int deleteByExample(VentaExample example);
 
-    int deleteByPrimaryKey(@Param("iddocumento") Integer iddocumento, @Param("numventa") Integer numventa);
+    int deleteByPrimaryKey(@Param("iddocumento") Integer iddocumento, @Param("numventa") String numventa);
 
     int insert(Venta record);
 
@@ -18,7 +18,7 @@ public interface VentaMapper {
 
     List<Venta> selectByExample(VentaExample example);
 
-    Venta selectByPrimaryKey(@Param("iddocumento") Integer iddocumento, @Param("numventa") Integer numventa);
+    Venta selectByPrimaryKey(@Param("iddocumento") Integer iddocumento, @Param("numventa") String numventa);
 
     int updateByExampleSelective(@Param("record") Venta record, @Param("example") VentaExample example);
 

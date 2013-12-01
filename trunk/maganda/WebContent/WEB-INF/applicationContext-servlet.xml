@@ -52,14 +52,6 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 		<property name="mapperInterface" value="com.maganda.dao.ColorMapper" />
 	</bean>
-	<bean id="compraMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-		<property name="mapperInterface" value="com.maganda.dao.CompraMapper" />
-	</bean>
-	<bean id="detallecompraMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-		<property name="mapperInterface" value="com.maganda.dao.DetallecompraMapper" />
-	</bean>
 	<bean id="detalleventaMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 		<property name="mapperInterface" value="com.maganda.dao.DetalleventaMapper" />
@@ -100,10 +92,6 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 		<property name="mapperInterface" value="com.maganda.dao.RolMapper" />
 	</bean>
-	<bean id="subcategoriaMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-		<property name="mapperInterface" value="com.maganda.dao.SubcategoriaMapper" />
-	</bean>
 	<bean id="sueldoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 		<property name="mapperInterface" value="com.maganda.dao.SueldoMapper" />
@@ -125,12 +113,6 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 	</bean>
 	<bean id="colorManager" class="com.maganda.logic.ColorManager">
 		<property name="colorMapper" ref="colorMapper" />
-	</bean>
-	<bean id="compraManager" class="com.maganda.logic.CompraManager">
-		<property name="compraMapper" ref="compraMapper" />
-	</bean>
-	<bean id="detallecompraManager" class="com.maganda.logic.DetallecompraManager">
-		<property name="detallecompraMapper" ref="detallecompraMapper" />
 	</bean>
 	<bean id="detalleventaManager" class="com.maganda.logic.DetalleventaManager">
 		<property name="detalleventaMapper" ref="detalleventaMapper" />
@@ -162,9 +144,6 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 	<bean id="rolManager" class="com.maganda.logic.RolManager">
 		<property name="rolMapper" ref="rolMapper" />
 	</bean>
-	<bean id="subcategoriaManager" class="com.maganda.logic.SubcategoriaManager">
-		<property name="subcategoriaMapper" ref="subcategoriaMapper" />
-	</bean>
 	<bean id="sueldoManager" class="com.maganda.logic.SueldoManager">
 		<property name="sueldoMapper" ref="sueldoMapper" />
 	</bean>
@@ -181,10 +160,6 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 		<aop:advisor pointcut="execution(* *..ClienteManager.*(..))"
 			advice-ref="simpleTxAdvice" />
 		<aop:advisor pointcut="execution(* *..ColorManager.*(..))"
-			advice-ref="simpleTxAdvice" />
-		<aop:advisor pointcut="execution(* *..CompraManager.*(..))"
-			advice-ref="simpleTxAdvice" />
-		<aop:advisor pointcut="execution(* *..DetallecompraManager.*(..))"
 			advice-ref="simpleTxAdvice" />
 		<aop:advisor pointcut="execution(* *..DetalleventaManager.*(..))"
 			advice-ref="simpleTxAdvice" />
@@ -205,8 +180,6 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 		<aop:advisor pointcut="execution(* *..ProveedorManager.*(..))"
 			advice-ref="simpleTxAdvice" />
 		<aop:advisor pointcut="execution(* *..RolManager.*(..))"
-			advice-ref="simpleTxAdvice" />
-		<aop:advisor pointcut="execution(* *..SubcategoriaManager.*(..))"
 			advice-ref="simpleTxAdvice" />
 		<aop:advisor pointcut="execution(* *..SueldoManager.*(..))"
 			advice-ref="simpleTxAdvice" />

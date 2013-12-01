@@ -6,7 +6,7 @@ import java.util.Date;
 public class Venta {
     private Integer iddocumento;
 
-    private Integer numventa;
+    private String numventa;
 
     private Integer idcliente;
 
@@ -30,13 +30,6 @@ public class Venta {
 
     private Date fecmodificacion;
 
-	private String desDocVenta;
-	private String numDocCliente;
-	private String desDocCliente;
-	private String nomCliente;
-    private double monTotal;
-    
-
     public Integer getIddocumento() {
         return iddocumento;
     }
@@ -45,12 +38,12 @@ public class Venta {
         this.iddocumento = iddocumento;
     }
 
-    public Integer getNumventa() {
+    public String getNumventa() {
         return numventa;
     }
 
-    public void setNumventa(Integer numventa) {
-        this.numventa = numventa;
+    public void setNumventa(String numventa) {
+        this.numventa = numventa == null ? null : numventa.trim();
     }
 
     public Integer getIdcliente() {
@@ -140,44 +133,4 @@ public class Venta {
     public void setFecmodificacion(Date fecmodificacion) {
         this.fecmodificacion = fecmodificacion;
     }
-
-	public String getDesDocVenta() {
-		return desDocVenta;
-	}
-
-	public void setDesDocVenta(String desDocVenta) {
-		this.desDocVenta = desDocVenta;
-	}
-
-	public String getNumDocCliente() {
-		return numDocCliente;
-	}
-
-	public void setNumDocCliente(String numDocCliente) {
-		this.numDocCliente = numDocCliente;
-	}
-
-	public String getDesDocCliente() {
-		return desDocCliente;
-	}
-
-	public void setDesDocCliente(String desDocCliente) {
-		this.desDocCliente = desDocCliente;
-	}
-
-	public String getNomCliente() {
-		return nomCliente;
-	}
-
-	public void setNomCliente(String nomCliente) {
-		this.nomCliente = nomCliente;
-	}
-
-	public double getMonTotal() {
-		return monTotal;
-	}
-
-	public void setMonTotal(double monTotal) {
-		this.monTotal = monTotal;
-	}
 }
