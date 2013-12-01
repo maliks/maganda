@@ -21,9 +21,13 @@ import com.maganda.domain.Cliente;
 import com.maganda.domain.Detalleventa;
 import com.maganda.domain.Persona;
 import com.maganda.domain.ProductoExample;
+import com.maganda.domain.Venta;
+import com.maganda.domain.VentaExample;
 import com.maganda.logic.ClienteManager;
+import com.maganda.logic.DetalleventaManager;
 import com.maganda.logic.PersonaManager;
 import com.maganda.logic.ProductoManager;
+import com.maganda.logic.VentaManager;
 
 @Controller
 public class VentaController {
@@ -35,11 +39,18 @@ public class VentaController {
 	private PersonaManager personaManager;
 	private List<Cliente> lstCliente;
 	private Persona persona;
-	private Map<String, Object> venta;
+	private Map<String, Object> ventaMap;
+	private VentaManager ventaManager;
+	private DetalleventaManager detalleventaManager;
+	private Venta venta;
+	private Detalleventa detalleventa;
+	private List<Venta> lstVenta;
+	private VentaExample ventaExample;
+	private Cliente cliente;
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/iniciarVenta")
-	public ModelAndView iniciarVenta(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView iniciarVenta(HttpServletRequest request, HttpServletResponse response){
 		
 		if(request.getSession().getAttribute("carritoVenta")==null){
 			lstDetalleVenta = new ArrayList<Detalleventa>();
@@ -50,13 +61,19 @@ public class VentaController {
 
 		cargarMapa(request);
 
-		venta.put("lstDetalleVenta", lstDetalleVenta);
+		ventaMap.put("lstDetalleVenta", lstDetalleVenta);
 		
-		return new ModelAndView("mostrarVenta","venta",venta);
+		return new ModelAndView("mostrarVenta","venta",ventaMap);
+	}
+	
+	@RequestMapping("/listarVenta")
+	public ModelAndView listarVenta(HttpServletRequest request, HttpServletResponse response){
+		listarVentas();
+		return new ModelAndView("listarVenta","lstVenta",getLstVenta());
 	}
 	
 	@RequestMapping("/buscarProducto")
-	public ModelAndView buscarProducto(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView buscarProducto(HttpServletRequest request, HttpServletResponse response){
 		
 		productoExample = new ProductoExample();
 		productoExample.setOrderByClause(" NOMBRE ");
@@ -67,7 +84,7 @@ public class VentaController {
 	}
 	
 	@RequestMapping("/agregarProducto")
-	public ModelAndView agregarProducto(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView agregarProducto(HttpServletRequest request, HttpServletResponse response){
 		
 		Detalleventa detalleventa = new Detalleventa();
 		
@@ -77,6 +94,7 @@ public class VentaController {
 		detalleventa.setMonto(new BigDecimal(Double.parseDouble(request.getParameter("txtMonto"))));
 		detalleventa.setDescuento(new BigDecimal(Double.parseDouble(request.getParameter("txtDescuento"))));
 				
+		@SuppressWarnings("unchecked")
 		List<Detalleventa> lstDetalleVenta =  (List<Detalleventa>)request.getSession().getAttribute("carritoVenta");
 		lstDetalleVenta.add(detalleventa);
 		
@@ -84,15 +102,16 @@ public class VentaController {
 		
 		cargarMapa(request);
 		
-		venta.put("lstDetalleVenta", lstDetalleVenta);
+		ventaMap.put("lstDetalleVenta", lstDetalleVenta);
 		
-		return new ModelAndView("mostrarVenta","venta",venta);
+		return new ModelAndView("mostrarVenta","venta",ventaMap);
 		
 	}
 	
 	@RequestMapping("/quitarProducto")
-	public ModelAndView quitarProducto(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView quitarProducto(HttpServletRequest request, HttpServletResponse response){
 		
+		@SuppressWarnings("unchecked")
 		List<Detalleventa> lstDetalleVenta =  (List<Detalleventa>)request.getSession().getAttribute("carritoVenta");
 		
 		int idProducto = Integer.parseInt(request.getParameter("idproducto"));
@@ -108,9 +127,70 @@ public class VentaController {
 		
 		cargarMapa(request);
 		
-		venta.put("lstDetalleVenta", lstDetalleVenta);
+		ventaMap.put("lstDetalleVenta", lstDetalleVenta);
 		
-		return new ModelAndView("mostrarVenta","venta",venta);
+		return new ModelAndView("mostrarVenta","venta",ventaMap);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/realizarVenta")
+	public ModelAndView realizarVenta(HttpServletRequest request, HttpServletResponse response) {
+		
+		venta = new Venta();
+		
+		venta.setIddocumento(Integer.parseInt(request.getParameter("cboIdDocumento")));
+		venta.setNumventa(Integer.parseInt(request.getParameter("txtNumeroDocumento")));
+		venta.setIdcliente(Integer.parseInt(request.getParameter("cboIdCliente")));
+		venta.setFecventa(stringToDate(request.getParameter("fecVenta")));
+		venta.setEstado("1");
+		
+		Double montoVenta = new Double(0);
+		Double montoDescuento = new Double(0);
+		Double montoIGV = new Double(0);
+		
+		lstDetalleVenta = (List<Detalleventa>)request.getSession().getAttribute("carritoVenta");
+		
+		for (int i = 0; i < lstDetalleVenta.size(); i++) {
+			montoVenta = lstDetalleVenta.get(i).getCantidad().doubleValue()*(lstDetalleVenta.get(i).getMonto().doubleValue() - lstDetalleVenta.get(i).getDescuento().doubleValue());
+			montoDescuento = lstDetalleVenta.get(i).getCantidad().doubleValue()*lstDetalleVenta.get(i).getDescuento().doubleValue();
+		}
+		
+		if(venta.getIddocumento() == 10){
+			montoIGV = montoVenta*0.18;
+		}
+		
+		venta.setMonventa(new BigDecimal(montoVenta));
+		venta.setMondescuento(new BigDecimal(montoDescuento));
+		venta.setMonigv(new BigDecimal(montoIGV));
+		venta.setMonadelanto(new BigDecimal(0));
+		
+		venta.setFecregistro(new java.util.Date());
+		venta.setFecentrega(new java.util.Date());	
+		venta.setFecpago(new java.util.Date());
+		
+		ventaManager.insertSelective(venta);
+		
+		detalleventa = new Detalleventa();
+		
+		for (int i = 0; i < lstDetalleVenta.size(); i++) {
+
+			detalleventa.setIdproducto(lstDetalleVenta.get(i).getIdproducto());
+			detalleventa.setIddocumento(venta.getIddocumento());
+			detalleventa.setNumventa(venta.getNumventa());
+			detalleventa.setCantidad(lstDetalleVenta.get(i).getCantidad());
+			detalleventa.setMonto(lstDetalleVenta.get(i).getMonto());
+			detalleventa.setDescuento(lstDetalleVenta.get(i).getDescuento());
+			detalleventa.setEstproducto("1");
+			detalleventa.setFecregistro(new java.util.Date());
+			
+			detalleventaManager.insertSelective(detalleventa);
+		}
+		
+		request.getSession().removeAttribute("carritoVenta");
+		
+		listarVentas();
+		
+		return new ModelAndView("listarVenta","lstVenta",getLstVenta());
 	}
 	
 	@RequestMapping("/cerrarVenta")
@@ -129,7 +209,7 @@ public class VentaController {
 		}
 	}
 	
-	public void cargarMapa(HttpServletRequest request) throws Exception{
+	public void cargarMapa(HttpServletRequest request){
 		
 		//Obtener cliente seleccionado
 		String idCliente = request.getParameter("cboIdCliente");
@@ -169,17 +249,48 @@ public class VentaController {
 		listarClientes();
 		
 		//Cargar el mapa
-		venta = new HashMap<String, Object>();
-		venta.put("lstCliente", getLstCliente());
-		venta.put("idCliente", idCliente);
-		venta.put("idDocumento",idDocumento);
-		venta.put("numeroDocumento",numeroDocumento);
-		venta.put("fecVenta",fecVenta);
+		ventaMap = new HashMap<String, Object>();
+		ventaMap.put("lstCliente", getLstCliente());
+		ventaMap.put("idCliente", idCliente);
+		ventaMap.put("idDocumento",idDocumento);
+		ventaMap.put("numeroDocumento",numeroDocumento);
+		ventaMap.put("fecVenta",fecVenta);
 	}
 	
-	public Date stringToDate(String date) throws Exception{
+	public Date stringToDate(String date){
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		return formatter.parse(date);
+		try{
+			return formatter.parse(date);
+		}catch(Exception e){
+			return new java.util.Date();
+		}
+		
+	}
+	
+	public void listarVentas(){
+		
+		ventaExample = new VentaExample();
+		ventaExample.setOrderByClause(" FECVENTA desc ");
+		
+		lstVenta = ventaManager.selectByExample(ventaExample);
+
+		for (int i = 0; i < lstVenta.size(); i++) {
+			
+			if(lstVenta.get(i).getIddocumento()==10) lstVenta.get(i).setDesDocVenta("FACTURA");
+			else lstVenta.get(i).setDesDocVenta("BOLETA");
+			
+			cliente = clienteManager.selectByPrimaryKey(lstVenta.get(i).getIdcliente());
+			persona = personaManager.selectByPrimaryKey(cliente.getIddocumento(), cliente.getNumdocumento());
+			
+			if(cliente.getIddocumento()==1) lstVenta.get(i).setDesDocCliente("DNI");
+			else lstVenta.get(i).setDesDocCliente("RUC");
+			
+			lstVenta.get(i).setNumDocCliente(cliente.getNumdocumento());
+			lstVenta.get(i).setNomCliente(persona.getApepaterno()+" "+persona.getApematerno()+" "+persona.getNombres());
+			
+			lstVenta.get(i).setMonTotal(lstVenta.get(i).getMonventa().doubleValue() + lstVenta.get(i).getMonigv().doubleValue());
+			
+		}
 	}
 
 	public ProductoManager getProductoManager() {
@@ -241,13 +352,70 @@ public class VentaController {
 		this.persona = persona;
 	}
 
-	public Map<String, Object> getVenta() {
+	public Map<String, Object> getVentaMap() {
+		return ventaMap;
+	}
+
+	public void setVentaMap(Map<String, Object> ventaMap) {
+		this.ventaMap = ventaMap;
+	}
+
+	public VentaManager getVentaManager() {
+		return ventaManager;
+	}
+
+	@Autowired
+	public void setVentaManager(VentaManager ventaManager) {
+		this.ventaManager = ventaManager;
+	}
+
+	public DetalleventaManager getDetalleventaManager() {
+		return detalleventaManager;
+	}
+
+	@Autowired
+	public void setDetalleventaManager(DetalleventaManager detalleventaManager) {
+		this.detalleventaManager = detalleventaManager;
+	}
+
+	public Venta getVenta() {
 		return venta;
 	}
 
-	public void setVenta(Map<String, Object> venta) {
+	public void setVenta(Venta venta) {
 		this.venta = venta;
 	}
 
+	public Detalleventa getDetalleventa() {
+		return detalleventa;
+	}
+
+	public void setDetalleventa(Detalleventa detalleventa) {
+		this.detalleventa = detalleventa;
+	}
+
+	public List<Venta> getLstVenta() {
+		return lstVenta;
+	}
+
+	public void setLstVenta(List<Venta> lstVenta) {
+		this.lstVenta = lstVenta;
+	}
+
+	public VentaExample getVentaExample() {
+		return ventaExample;
+	}
+
+	public void setVentaExample(VentaExample ventaExample) {
+		this.ventaExample = ventaExample;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 	
 }
