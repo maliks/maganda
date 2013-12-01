@@ -1,9 +1,12 @@
 package com.maganda.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Producto {
     private Integer idproducto;
+
+    private String codproducto;
 
     private String nombre;
 
@@ -13,9 +16,23 @@ public class Producto {
 
     private Integer idcolor;
 
-    private Integer idsubcategoria;
+    private Integer idcategoria;
 
     private Integer idmarca;
+
+    private Integer iddocumento;
+
+    private String numcompra;
+
+    private Integer idproveedor;
+
+    private BigDecimal moncosto;
+
+    private BigDecimal monventa;
+
+    private Date feccompra;
+
+    private String estado;
 
     private Date fecregistro;
 
@@ -27,6 +44,14 @@ public class Producto {
 
     public void setIdproducto(Integer idproducto) {
         this.idproducto = idproducto;
+    }
+
+    public String getCodproducto() {
+        return codproducto;
+    }
+
+    public void setCodproducto(String codproducto) {
+        this.codproducto = codproducto == null ? null : codproducto.trim();
     }
 
     public String getNombre() {
@@ -61,12 +86,12 @@ public class Producto {
         this.idcolor = idcolor;
     }
 
-    public Integer getIdsubcategoria() {
-        return idsubcategoria;
+    public Integer getIdcategoria() {
+        return idcategoria;
     }
 
-    public void setIdsubcategoria(Integer idsubcategoria) {
-        this.idsubcategoria = idsubcategoria;
+    public void setIdcategoria(Integer idcategoria) {
+        this.idcategoria = idcategoria;
     }
 
     public Integer getIdmarca() {
@@ -75,6 +100,62 @@ public class Producto {
 
     public void setIdmarca(Integer idmarca) {
         this.idmarca = idmarca;
+    }
+
+    public Integer getIddocumento() {
+        return iddocumento;
+    }
+
+    public void setIddocumento(Integer iddocumento) {
+        this.iddocumento = iddocumento;
+    }
+
+    public String getNumcompra() {
+        return numcompra;
+    }
+
+    public void setNumcompra(String numcompra) {
+        this.numcompra = numcompra == null ? null : numcompra.trim();
+    }
+
+    public Integer getIdproveedor() {
+        return idproveedor;
+    }
+
+    public void setIdproveedor(Integer idproveedor) {
+        this.idproveedor = idproveedor;
+    }
+
+    public BigDecimal getMoncosto() {
+        return moncosto;
+    }
+
+    public void setMoncosto(BigDecimal moncosto) {
+        this.moncosto = moncosto;
+    }
+
+    public BigDecimal getMonventa() {
+        return monventa;
+    }
+
+    public void setMonventa(BigDecimal monventa) {
+        this.monventa = monventa;
+    }
+
+    public Date getFeccompra() {
+        return feccompra;
+    }
+
+    public void setFeccompra(Date feccompra) {
+        this.feccompra = feccompra;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado == null ? null : estado.trim();
     }
 
     public Date getFecregistro() {

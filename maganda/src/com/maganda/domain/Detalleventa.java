@@ -8,7 +8,7 @@ public class Detalleventa {
 
     private Integer iddocumento;
 
-    private Integer numventa;
+    private String numventa;
 
     private Integer cantidad;
 
@@ -21,8 +21,6 @@ public class Detalleventa {
     private Date fecregistro;
 
     private Date fecmodificacion;
-    
-    private String nomProducto;
 
     public Integer getIdproducto() {
         return idproducto;
@@ -40,12 +38,12 @@ public class Detalleventa {
         this.iddocumento = iddocumento;
     }
 
-    public Integer getNumventa() {
+    public String getNumventa() {
         return numventa;
     }
 
-    public void setNumventa(Integer numventa) {
-        this.numventa = numventa;
+    public void setNumventa(String numventa) {
+        this.numventa = numventa == null ? null : numventa.trim();
     }
 
     public Integer getCantidad() {
@@ -95,22 +93,4 @@ public class Detalleventa {
     public void setFecmodificacion(Date fecmodificacion) {
         this.fecmodificacion = fecmodificacion;
     }
-
-	public String getNomProducto() {
-		return nomProducto;
-	}
-
-	public void setNomProducto(String nomProducto) {
-		this.nomProducto = nomProducto;
-	}
-
-	@Override
-	public String toString() {
-		return "Detalleventa [idproducto=" + idproducto + ", iddocumento="
-				+ iddocumento + ", numventa=" + numventa + ", cantidad="
-				+ cantidad + ", monto=" + monto + ", descuento=" + descuento
-				+ ", estproducto=" + estproducto + ", fecregistro="
-				+ fecregistro + ", fecmodificacion=" + fecmodificacion
-				+ ", nomProducto=" + nomProducto + "]";
-	}
 }

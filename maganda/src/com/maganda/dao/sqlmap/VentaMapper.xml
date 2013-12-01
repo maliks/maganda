@@ -3,7 +3,7 @@
 <mapper namespace="com.maganda.dao.VentaMapper" >
   <resultMap id="BaseResultMap" type="com.maganda.domain.Venta" >
     <id column="IDDOCUMENTO" property="iddocumento" jdbcType="INTEGER" />
-    <id column="NUMVENTA" property="numventa" jdbcType="INTEGER" />
+    <id column="NUMVENTA" property="numventa" jdbcType="VARCHAR" />
     <result column="IDCLIENTE" property="idcliente" jdbcType="INTEGER" />
     <result column="FECVENTA" property="fecventa" jdbcType="TIMESTAMP" />
     <result column="FECENTREGA" property="fecentrega" jdbcType="TIMESTAMP" />
@@ -97,12 +97,12 @@
     <include refid="Base_Column_List" />
     from venta
     where IDDOCUMENTO = #{iddocumento,jdbcType=INTEGER}
-      and NUMVENTA = #{numventa,jdbcType=INTEGER}
+      and NUMVENTA = #{numventa,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="map" >
     delete from venta
     where IDDOCUMENTO = #{iddocumento,jdbcType=INTEGER}
-      and NUMVENTA = #{numventa,jdbcType=INTEGER}
+      and NUMVENTA = #{numventa,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.maganda.domain.VentaExample" >
     delete from venta
@@ -116,7 +116,7 @@
       ESTADO, MONVENTA, MONDESCUENTO, 
       MONADELANTO, MONIGV, FECREGISTRO, 
       FECMODIFICACION)
-    values (#{iddocumento,jdbcType=INTEGER}, #{numventa,jdbcType=INTEGER}, #{idcliente,jdbcType=INTEGER}, 
+    values (#{iddocumento,jdbcType=INTEGER}, #{numventa,jdbcType=VARCHAR}, #{idcliente,jdbcType=INTEGER}, 
       #{fecventa,jdbcType=TIMESTAMP}, #{fecentrega,jdbcType=TIMESTAMP}, #{fecpago,jdbcType=TIMESTAMP}, 
       #{estado,jdbcType=CHAR}, #{monventa,jdbcType=DECIMAL}, #{mondescuento,jdbcType=DECIMAL}, 
       #{monadelanto,jdbcType=DECIMAL}, #{monigv,jdbcType=DECIMAL}, #{fecregistro,jdbcType=TIMESTAMP}, 
@@ -170,7 +170,7 @@
         #{iddocumento,jdbcType=INTEGER},
       </if>
       <if test="numventa != null" >
-        #{numventa,jdbcType=INTEGER},
+        #{numventa,jdbcType=VARCHAR},
       </if>
       <if test="idcliente != null" >
         #{idcliente,jdbcType=INTEGER},
@@ -220,7 +220,7 @@
         IDDOCUMENTO = #{record.iddocumento,jdbcType=INTEGER},
       </if>
       <if test="record.numventa != null" >
-        NUMVENTA = #{record.numventa,jdbcType=INTEGER},
+        NUMVENTA = #{record.numventa,jdbcType=VARCHAR},
       </if>
       <if test="record.idcliente != null" >
         IDCLIENTE = #{record.idcliente,jdbcType=INTEGER},
@@ -263,7 +263,7 @@
   <update id="updateByExample" parameterType="map" >
     update venta
     set IDDOCUMENTO = #{record.iddocumento,jdbcType=INTEGER},
-      NUMVENTA = #{record.numventa,jdbcType=INTEGER},
+      NUMVENTA = #{record.numventa,jdbcType=VARCHAR},
       IDCLIENTE = #{record.idcliente,jdbcType=INTEGER},
       FECVENTA = #{record.fecventa,jdbcType=TIMESTAMP},
       FECENTREGA = #{record.fecentrega,jdbcType=TIMESTAMP},
@@ -317,7 +317,7 @@
       </if>
     </set>
     where IDDOCUMENTO = #{iddocumento,jdbcType=INTEGER}
-      and NUMVENTA = #{numventa,jdbcType=INTEGER}
+      and NUMVENTA = #{numventa,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.maganda.domain.Venta" >
     update venta
@@ -333,6 +333,6 @@
       FECREGISTRO = #{fecregistro,jdbcType=TIMESTAMP},
       FECMODIFICACION = #{fecmodificacion,jdbcType=TIMESTAMP}
     where IDDOCUMENTO = #{iddocumento,jdbcType=INTEGER}
-      and NUMVENTA = #{numventa,jdbcType=INTEGER}
+      and NUMVENTA = #{numventa,jdbcType=VARCHAR}
   </update>
 </mapper>

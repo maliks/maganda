@@ -236,52 +236,62 @@ public class DetalleventaExample {
             return (Criteria) this;
         }
 
-        public Criteria andNumventaEqualTo(Integer value) {
+        public Criteria andNumventaEqualTo(String value) {
             addCriterion("NUMVENTA =", value, "numventa");
             return (Criteria) this;
         }
 
-        public Criteria andNumventaNotEqualTo(Integer value) {
+        public Criteria andNumventaNotEqualTo(String value) {
             addCriterion("NUMVENTA <>", value, "numventa");
             return (Criteria) this;
         }
 
-        public Criteria andNumventaGreaterThan(Integer value) {
+        public Criteria andNumventaGreaterThan(String value) {
             addCriterion("NUMVENTA >", value, "numventa");
             return (Criteria) this;
         }
 
-        public Criteria andNumventaGreaterThanOrEqualTo(Integer value) {
+        public Criteria andNumventaGreaterThanOrEqualTo(String value) {
             addCriterion("NUMVENTA >=", value, "numventa");
             return (Criteria) this;
         }
 
-        public Criteria andNumventaLessThan(Integer value) {
+        public Criteria andNumventaLessThan(String value) {
             addCriterion("NUMVENTA <", value, "numventa");
             return (Criteria) this;
         }
 
-        public Criteria andNumventaLessThanOrEqualTo(Integer value) {
+        public Criteria andNumventaLessThanOrEqualTo(String value) {
             addCriterion("NUMVENTA <=", value, "numventa");
             return (Criteria) this;
         }
 
-        public Criteria andNumventaIn(List<Integer> values) {
+        public Criteria andNumventaLike(String value) {
+            addCriterion("NUMVENTA like", value, "numventa");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumventaNotLike(String value) {
+            addCriterion("NUMVENTA not like", value, "numventa");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumventaIn(List<String> values) {
             addCriterion("NUMVENTA in", values, "numventa");
             return (Criteria) this;
         }
 
-        public Criteria andNumventaNotIn(List<Integer> values) {
+        public Criteria andNumventaNotIn(List<String> values) {
             addCriterion("NUMVENTA not in", values, "numventa");
             return (Criteria) this;
         }
 
-        public Criteria andNumventaBetween(Integer value1, Integer value2) {
+        public Criteria andNumventaBetween(String value1, String value2) {
             addCriterion("NUMVENTA between", value1, value2, "numventa");
             return (Criteria) this;
         }
 
-        public Criteria andNumventaNotBetween(Integer value1, Integer value2) {
+        public Criteria andNumventaNotBetween(String value1, String value2) {
             addCriterion("NUMVENTA not between", value1, value2, "numventa");
             return (Criteria) this;
         }
