@@ -7,6 +7,7 @@
 <title>Registro de Cliente</title>
 
 <link rel="StyleSheet" type="text/css" href="js/dijit/themes/nihilo/nihilo.css">
+<link rel="stylesheet" type="text/css" href="css/form.css"/>
 
 <script type="text/javascript">
 	var djConfig = {
@@ -26,12 +27,37 @@
     dojo.require("dijit.form.FilteringSelect");
 </script>
 
+<script type="text/javascript">
+
+	function volver(){
+		window.location.href = "${pageContext.request.contextPath}/listarCliente.mgd";
+	}
+	
+	function validarTipoDocumento(){
+		var tipoDocumento = dijit.byId('cboIdDocumento').attr('value');
+		if(tipoDocumento == "1"){
+			dojo.attr('txtApellidoPaterno', 'disabled', false);
+			dojo.attr('txtApellidoMaterno', 'disabled', false);
+			document.getElementById("txtApellidoMaterno").value = "";
+			dojo.attr('txtNombres', 'disabled', false);
+			document.getElementById("txtNombres").value = "";
+		}else{
+			dojo.attr('txtApellidoPaterno', 'disabled', false);
+			document.getElementById("txtApellidoMaterno").value = "-";
+			dojo.attr('txtApellidoMaterno', 'disabled', true);
+			document.getElementById("txtNombres").value = "-";
+			dojo.attr('txtNombres', 'disabled', true);
+		}
+	}
+
+</script>
+
 </head>
 <body class="nihilo">
-	<h4>
-		<center>Registro de Clientes</center>
-	</h4>
-	
+
+	<div align="center" class="tituloFormulario">Registro de Clientes</div>
+	<div align="center">
+	<fieldset class="estiloFieldset">
 	<div dojoType="dijit.form.Form" id="myForm" jsId="myForm" action="${pageContext.request.contextPath}/grabarCliente.mgd" method="post">
 	
 		<script type="dojo/method" event="onReset">
@@ -52,7 +78,7 @@
 			<tr>
 				<td align="right">Tipo de documento:</td>
 				<td align="left">
-					<select name="cboIdDocumento" id="cboIdDocumento" dojoType="dijit.form.FilteringSelect" autocomplete="true" required="true">
+					<select name="cboIdDocumento" id="cboIdDocumento" dojoType="dijit.form.FilteringSelect" autocomplete="true" required="true" onchange="validarTipoDocumento()">
 						<option value="1" selected="selected">DNI</option>
 						<option value="2">RUC</option>
 				</select>
@@ -74,16 +100,46 @@
 				</td>
 			</tr>
 			<tr>
-				<td align="right">Nombre / Raz&oacute;n Social:</td>
+				<td align="right">Apellido Paterno / Razon Social:</td>
 				<td align="left">
 					<input
 						type="text"
 						name="txtApellidoPaterno"
 						id="txtApellidoPaterno"
+						maxlength="50"
+						required="true"
+						trim="true"
+						uppercase="true"
+						dojoType="dijit.form.ValidationTextBox"
+					/>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">Apellido Materno:</td>
+				<td align="left">
+					<input
+						type="text"
+						name="txtApellidoMaterno"
+						id="txtApellidoMaterno"
 						maxlength="30"
 						required="true"
 						trim="true"
-						propercase="true"
+						uppercase="true"
+						dojoType="dijit.form.ValidationTextBox"
+					/>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">Nombres:</td>
+				<td align="left">
+					<input
+						type="text"
+						name="txtNombres"
+						id="txtNombres"
+						maxlength="30"
+						required="true"
+						trim="true"
+						uppercase="true"
 						dojoType="dijit.form.ValidationTextBox"
 					/>
 				</td>
@@ -98,7 +154,7 @@
 						maxlength="100"
 						required="true"
 						trim="true"
-						propercase="true"
+						uppercase="true"
 						dojoType="dijit.form.ValidationTextBox"
 					/>
 				</td>
@@ -130,12 +186,15 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<button dojoType="dijit.form.Button" type="submit" name="submitButton" value="Submit">Grabar</button>
-		            <button dojoType="dijit.form.Button" type="reset">Limpiar</button>
+					<button dojoType="dijit.form.Button" iconClass="dijitEditorIcon dijitEditorIconSave" type="submit" name="submitButton" value="Submit">Grabar</button>
+		            <button dojoType="dijit.form.Button" iconClass="dijitEditorIcon dijitEditorIconRemoveFormat" type="reset">Limpiar</button>
+		            <button dojoType="dijit.form.Button" iconClass="dijitEditorIcon dijitEditorIconUndo" type="button" onclick="volver()">Volver</button>
 				</td>
 			</tr>
 		</table>
 
-	</form>
+	</div>
+	</fieldset>
+	</div>
 </body>
 </html>

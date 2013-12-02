@@ -35,8 +35,12 @@
 		window.location.href = "${pageContext.request.contextPath}/iniciarVenta.mgd";
 	}
 	
-	function actualizarNombreProducto(){
-		document.getElementById("txtNombre").value = document.getElementById("cboIdProducto").value;
+	function actualizarDatosProducto(){
+		
+		var producto = document.getElementById("cboIdProducto").value;
+		
+		document.getElementById("txtNombre").value = producto.substring(0,producto.lastIndexOf("(")-1);
+		document.getElementById("txtMonto").value = producto.substring(producto.lastIndexOf("=")+1,producto.length-1);
 	}
 	
 </script>
@@ -82,10 +86,10 @@
 						value=""
 						pageSize=5
 						style="width:450px"
-						onchange="actualizarNombreProducto()"
+						onchange="actualizarDatosProducto()"
 					>
 						<c:forEach var="producto" items="${lstProducto}">
-							<option value="${producto.idproducto}">${producto.nombre}</option>
+							<option value="${producto.idproducto}">${producto.nombre} (Precio=${producto.monventa})</option>
 						</c:forEach>
 					</select>
 					<input type="hidden" name="txtNombre" id="txtNombre" value=""/>
@@ -118,6 +122,7 @@
 						maxlength="10"
 						required="true"
 						trim="true"
+						readonly="readonly"
 						regExp="^\d+(\.\d{1,2})?$"
 						dojoType="dijit.form.ValidationTextBox"
 					/>

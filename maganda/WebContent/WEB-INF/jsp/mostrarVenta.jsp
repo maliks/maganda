@@ -96,9 +96,8 @@
 						id="txtNumeroDocumento"
 						required="true"
 						trim="true"
-						regExp="^\d+$"
 						value="${venta.numeroDocumento}"
-						maxlength="11"
+						maxlength="30"
 						dojoType="dijit.form.ValidationTextBox"
 						/>
 					</br>

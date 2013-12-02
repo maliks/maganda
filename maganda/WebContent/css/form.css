@@ -10,3 +10,19 @@
 	width: 600px;
 	text-align: left;
 }
+
+.tituloMenu {
+	font-family: fantasy;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 30px;
+	color: #000000;
+}
+
+.itemMenu {
+	font-family: fantasy;
+	text-align: left;
+	vertical-align: middle;
+	font-size: 30px;
+	color: #000000;
+}

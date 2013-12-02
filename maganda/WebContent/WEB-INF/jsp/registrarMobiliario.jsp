@@ -7,6 +7,7 @@
 <title>Registro de Mobiliarios</title>
 
 <link rel="StyleSheet" type="text/css" href="js/dijit/themes/nihilo/nihilo.css">
+<link rel="stylesheet" type="text/css" href="css/form.css"/>
 
 <script type="text/javascript">
 	var djConfig = {
@@ -30,10 +31,20 @@
     dojo.require("dijit.form.DateTextBox");
 </script>
 
+<script type="text/javascript">
+
+	function volver(){
+		window.location.href = "${pageContext.request.contextPath}/listarMobiliario.mgd";
+	}
+	
+</script>
+
 </head>
 <body class="nihilo">
 	
-	<center>Registro de Mobiliarios</center>
+	<div align="center" class="tituloFormulario">Registro de Mobiliario</div>
+	<div align="center">
+	<fieldset class="estiloFieldset">
 	
 	<div dojoType="dijit.form.Form" id="myForm" jsId="myForm" action="${pageContext.request.contextPath}/grabarMobiliario.mgd" method="post">
 	
@@ -52,7 +63,7 @@
 		</script>
 	
 		<table width="400" border="0" align="center">
-		<tr>
+			<tr>
 				<td align="right">Nombre:</td>
 				<td align="left">
 					<input
@@ -61,6 +72,7 @@
 						id="txtNombre"
 						required="true"
 						trim="true"
+						uppercase="true"
 						maxlength="30"
 						dojoType="dijit.form.ValidationTextBox"
 						/>
@@ -87,6 +99,9 @@
 					<textarea
 						name="txtDescripcion"
 						id="txtDireccion"
+						maxlength="250"
+						required="true"
+						uppercase="true"
 						dojoType="dijit.form.SimpleTextarea">
 					</textarea>
 				</td>
@@ -98,8 +113,9 @@
 						type="textbox"
 						name="txtMonto"
 						id="txtMonto" 
-						regExp="^\d+(\.\d{1,3})?$"
+						regExp="^\d+(\.\d{1,2})?$"
 						maxlength="10"
+						required="true"
 						dojoType="dijit.form.ValidationTextBox"/>
 				</td>
 			</tr>
@@ -122,14 +138,17 @@
 			</tr>
 			<tr>	
 				<td colspan="2" align="center">
-					<button dojoType="dijit.form.Button" type="submit" name="submitButton" value="Submit">Grabar</button>
-		            <button dojoType="dijit.form.Button" type="reset">Limpiar</button>
+					<button dojoType="dijit.form.Button" iconClass="dijitEditorIcon dijitEditorIconSave" type="submit" name="submitButton" value="Submit">Grabar</button>
+		            <button dojoType="dijit.form.Button" iconClass="dijitEditorIcon dijitEditorIconRemoveFormat" type="reset">Limpiar</button>
+		            <button dojoType="dijit.form.Button" iconClass="dijitEditorIcon dijitEditorIconUndo" type="button" onclick="volver()">Volver</button>
 				</td>
 			</tr>
 			
 			
 		</table>
 
+	</div>
+	</fieldset>
 	</div>
 </body>
 </html>

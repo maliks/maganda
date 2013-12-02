@@ -6,9 +6,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Registro de Cliente</title>
+<title>Modificar datos del cliente</title>
 
 <link rel="StyleSheet" type="text/css" href="js/dijit/themes/nihilo/nihilo.css">
+<link rel="stylesheet" type="text/css" href="css/form.css"/>
 
 <script type="text/javascript">
 	var djConfig = {
@@ -28,15 +29,21 @@
     dojo.require("dijit.form.FilteringSelect");
 </script>
 
+<script type="text/javascript">
+
+	function volver(){
+		window.location.href = "${pageContext.request.contextPath}/listarCliente.mgd";
+	}
+
+</script>
+
 </head>
 <body class="nihilo">
-	<h4>
-		<center>Modificar Datos de Cliente</center>
-	</h4>
+	<div align="center" class="tituloFormulario">Modificar datos del cliente</div>
+	<div align="center">
+	<fieldset class="estiloFieldset">
 	
-	<form action="${pageContext.request.contextPath}/grabarCliente" method="post">
-	
-	<div dojoType="dijit.form.Form" id="myForm" jsId="myForm" action="${pageContext.request.contextPath}/modificarCliente.mgd" method="post">
+	<div dojoType="dijit.form.Form" id="myForm" jsId="myForm" action="${pageContext.request.contextPath}/grabarCliente.mgd" method="post">
 	
 		<script type="dojo/method" event="onReset">
 			return true;
@@ -71,9 +78,9 @@
 			<tr>
 				<td align="right">Tipo de documento:</td>
 				<td align="left">
-					<select name="cboIdDocumento" id="cboIdDocumento" dojoType="dijit.form.FilteringSelect" autocomplete="true" required="true">
-						<option value="1" selected="selected">DNI</option>
-						<option value="2">RUC</option>
+					<select name="cboIdDocumento" id="cboIdDocumento" dojoType="dijit.form.FilteringSelect" readonly="readonly" autocomplete="true" required="true">
+						<option value="1" <c:if test="${cliente.iddocumento==1}">selected="selected"</c:if>>DNI</option>
+						<option value="2" <c:if test="${cliente.iddocumento==2}">selected="selected"</c:if>>RUC</option>
 				</select>
 				</td>
 			</tr>
@@ -87,6 +94,7 @@
 						required="true"
 						trim="true"
 						regExp="^\d+$"
+						readonly="readonly"
 						value="<c:out value="${cliente.numdocumento}"/>"
 						maxlength="11"
 						dojoType="dijit.form.ValidationTextBox"
@@ -94,7 +102,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td align="right">Nombre / Raz&oacute;n Social:</td>
+				<td align="right">Apellido Paterno / Razon Social:</td>
 				<td align="left">
 					<input
 						type="text"
@@ -102,9 +110,43 @@
 						id="txtApellidoPaterno"
 						maxlength="30"
 						required="true"
-						trim="true"
 						value="<c:out value="${cliente.apepaterno}"/>"
-						propercase="true"
+						trim="true"
+						uppercase="true"
+						dojoType="dijit.form.ValidationTextBox"
+					/>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">Apellido Materno:</td>
+				<td align="left">
+					<input
+						type="text"
+						name="txtApellidoMaterno"
+						id="txtApellidoMaterno"
+						maxlength="30"
+						required="true"
+						value="<c:out value="${cliente.apematerno}"/><c:if test="${cliente.iddocumento==2}">-</c:if>"
+						<c:if test="${cliente.iddocumento==2}">disabled="disabled"</c:if>
+						trim="true"
+						uppercase="true"
+						dojoType="dijit.form.ValidationTextBox"
+					/>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">Nombres:</td>
+				<td align="left">
+					<input
+						type="text"
+						name="txtNombres"
+						id="txtNombres"
+						maxlength="30"
+						required="true"
+						trim="true"
+						value="<c:out value="${cliente.nombres}"/><c:if test="${cliente.iddocumento==2}">-</c:if>"
+						<c:if test="${cliente.iddocumento==2}">disabled="disabled"</c:if>
+						uppercase="true"
 						dojoType="dijit.form.ValidationTextBox"
 					/>
 				</td>
@@ -120,7 +162,7 @@
 						required="true"
 						trim="true"
 						value="<c:out value="${cliente.direccion}"/>"
-						propercase="true"
+						uppercase="true"
 						dojoType="dijit.form.ValidationTextBox"
 					/>
 				</td>
@@ -145,20 +187,22 @@
 				<td align="right">Estado:</td>
 				<td align="left">
 					<select name="cboEstado" id="cboEstado" dojoType="dijit.form.FilteringSelect" autocomplete="true" required="true">
-						<option value="1" selected="selected">Activo</option>
-						<option value="0">Baja</option>
+						<option value="1" <c:if test="${cliente.estado=='1'}">selected="selected"</c:if>>Activo</option>
+						<option value="0" <c:if test="${cliente.estado=='0'}">selected="selected"</c:if>>Baja</option>
 				</select>
 				</td>
 
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<button dojoType="dijit.form.Button" type="submit" name="submitButton" value="Submit">Grabar</button>
-		            <button dojoType="dijit.form.Button" type="reset">Limpiar</button>
+					<button dojoType="dijit.form.Button" iconClass="dijitEditorIcon dijitEditorIconSave" type="submit" name="submitButton" value="Submit">Grabar</button>
+		            <button dojoType="dijit.form.Button" iconClass="dijitEditorIcon dijitEditorIconUndo" type="button" onclick="volver()">Volver</button>
 				</td>
 			</tr>
 		</table>
 
-	</form>
+	</div>
+	</fieldset>
+	</div>
 </body>
 </html>
