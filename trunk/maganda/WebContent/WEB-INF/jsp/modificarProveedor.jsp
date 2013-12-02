@@ -9,6 +9,7 @@
 <title>Modificar Datos del Proveedor</title>
 
 <link rel="StyleSheet" type="text/css" href="js/dijit/themes/nihilo/nihilo.css">
+<link rel="stylesheet" type="text/css" href="css/form.css"/>
 
 <script type="text/javascript">
 	var djConfig = {
@@ -38,8 +39,9 @@
 
 </head>
 <body class="nihilo">
-	<h4 align="center">Modificar Datos del Proveedor</h4>
-	
+	<div align="center" class="tituloFormulario">Modificar Datos del Proveedor</div>
+	<div align="center">
+	<fieldset class="estiloFieldset">
 	<div dojoType="dijit.form.Form" id="myForm" jsId="myForm" action="${pageContext.request.contextPath}/grabarProveedor.mgd" method="post">
 
 	<script type="dojo/method" event="onSubmit">
@@ -71,7 +73,7 @@
 			<tr>
 				<td align="right">Tipo de documento:</td>
 				<td align="left">
-					<select name="cboIdDocumento" id="cboIdDocumento" dojoType="dijit.form.FilteringSelect" autocomplete="true" readonly="readonly" required="true" onchange="validarTipoDocumento()">
+					<select name="cboIdDocumento" id="cboIdDocumento" dojoType="dijit.form.FilteringSelect" autocomplete="true" readonly="readonly" required="true">
 							<option value="1" <c:if test="${proveedor.iddocumento==1}">selected="selected"</c:if>>DNI</option>
 							<option value="2" <c:if test="${proveedor.iddocumento==2}">selected="selected"</c:if>>RUC</option>
 					</select>
@@ -105,7 +107,7 @@
 						required="true"
 						value="<c:out value="${proveedor.apepaterno}"/>"
 						trim="true"
-						propercase="true"
+						uppercase="true"
 						dojoType="dijit.form.ValidationTextBox"
 					/>
 				</td>
@@ -122,7 +124,7 @@
 						value="<c:out value="${proveedor.apematerno}"/><c:if test="${proveedor.iddocumento==2}">-</c:if>"
 						<c:if test="${proveedor.iddocumento==2}">disabled="disabled"</c:if>
 						trim="true"
-						propercase="true"
+						uppercase="true"
 						dojoType="dijit.form.ValidationTextBox"
 					/>
 				</td>
@@ -139,7 +141,7 @@
 						trim="true"
 						value="<c:out value="${proveedor.nombres}"/><c:if test="${proveedor.iddocumento==2}">-</c:if>"
 						<c:if test="${proveedor.iddocumento==2}">disabled="disabled"</c:if>
-						propercase="true"
+						uppercase="true"
 						dojoType="dijit.form.ValidationTextBox"
 					/>
 				</td>
@@ -155,7 +157,7 @@
 						required="true"
 						trim="true"
 						value="<c:out value="${proveedor.direccion}"/>"
-						propercase="true"
+						uppercase="true"
 						dojoType="dijit.form.ValidationTextBox"
 					/>
 				</td>
@@ -194,6 +196,8 @@
 			</tr>
 		</table>
 
+	</div>
+	</fieldset>
 	</div>
 </body>
 </html>

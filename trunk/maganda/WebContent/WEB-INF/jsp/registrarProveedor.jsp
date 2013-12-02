@@ -105,10 +105,10 @@
 						type="text"
 						name="txtApellidoPaterno"
 						id="txtApellidoPaterno"
-						maxlength="30"
+						maxlength="50"
 						required="true"
 						trim="true"
-						propercase="true"
+						uppercase="true"
 						dojoType="dijit.form.ValidationTextBox"
 					/>
 				</td>
@@ -123,7 +123,7 @@
 						maxlength="30"
 						required="true"
 						trim="true"
-						propercase="true"
+						uppercase="true"
 						dojoType="dijit.form.ValidationTextBox"
 					/>
 				</td>
@@ -138,7 +138,7 @@
 						maxlength="30"
 						required="true"
 						trim="true"
-						propercase="true"
+						uppercase="true"
 						dojoType="dijit.form.ValidationTextBox"
 					/>
 				</td>
@@ -153,7 +153,7 @@
 						maxlength="100"
 						required="true"
 						trim="true"
-						propercase="true"
+						uppercase="true"
 						dojoType="dijit.form.ValidationTextBox"
 					/>
 				</td>
