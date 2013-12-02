@@ -1,13 +1,17 @@
 package com.maganda.controller;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.maganda.domain.Cliente;
+import com.maganda.domain.ClienteExample;
 import com.maganda.domain.Persona;
 import com.maganda.domain.PersonaExample;
 import com.maganda.logic.ClienteManager;
@@ -22,6 +26,7 @@ public class ClienteController {
 	private Cliente cliente;
 	private Persona persona;
 	private PersonaExample personaExample;
+	private ClienteExample clienteExample;
 	private List<Cliente> lstCliente;
 
 	
@@ -33,7 +38,10 @@ public class ClienteController {
 	
 	@RequestMapping("/consultarCliente")
 	public ModelAndView consultarCliente(HttpServletRequest request, HttpServletResponse response) {
-		return new ModelAndView("modificarCliente", "cliente", clienteManager.selectByPrimaryKey(Integer.parseInt(request.getParameter("idcliente"))));
+		
+		cargarDatosCliente(Integer.parseInt(request.getParameter("idcliente")));
+		
+		return new ModelAndView("modificarCliente", "cliente", getCliente());
 	}
 	
 	@RequestMapping("/registrarCliente")
@@ -44,31 +52,43 @@ public class ClienteController {
 	@RequestMapping("/grabarCliente")
 	public ModelAndView grabarCliente(HttpServletRequest request, HttpServletResponse response) {
 		
-		if(!buscarPersona(Integer.parseInt(request.getParameter("cboIdDocumento")), request.getParameter("txtNumeroDocumento"))){
-			persona = new Persona();
-			
-			persona.setIddocumento(Integer.parseInt(request.getParameter("cboIdDocumento")));
-			persona.setNumdocumento(request.getParameter("txtNumeroDocumento"));
-			persona.setTippersona("1");
-			persona.setApepaterno(request.getParameter("txtApellidoPaterno"));
-			persona.setFeccreacion(new java.util.Date());
-			
-			personaManager.insertSelective(persona);
-			
-			cliente = new Cliente();
-			
-			cliente.setIddocumento(Integer.parseInt(request.getParameter("cboIdDocumento")));
-			cliente.setNumdocumento(request.getParameter("txtNumeroDocumento"));
-			cliente.setNumtelefono(request.getParameter("txtNumeroTelefono"));
-			cliente.setDireccion(request.getParameter("txtDireccion"));
-			cliente.setEstado(request.getParameter("cboEstado"));
-			cliente.setFecregistro(new java.util.Date());
-			
-			clienteManager.insertSelective(cliente);
+		
+		persona = new Persona();
+		
+		persona.setIddocumento(Integer.parseInt(request.getParameter("cboIdDocumento")));
+		persona.setTippersona(request.getParameter("cboIdDocumento"));
+		persona.setNumdocumento(request.getParameter("txtNumeroDocumento"));
+		persona.setApepaterno(request.getParameter("txtApellidoPaterno"));
+		persona.setApematerno(request.getParameter("txtApellidoMaterno"));
+		persona.setNombres(request.getParameter("txtNombres"));
+		
+		if(buscarPersona()){
+			persona.setFecmodificacion(new java.util.Date());
+			personaManager.updateByPrimaryKeySelective(persona);
 		}else{
-			
+			persona.setFeccreacion(new java.util.Date());
+			personaManager.insertSelective(persona);
 		}
 		
+		cliente = new Cliente();
+		
+		if(request.getParameter("idCliente")!=null) cliente.setIdcliente(Integer.parseInt(request.getParameter("idCliente")));
+						
+		cliente.setIddocumento(Integer.parseInt(request.getParameter("cboIdDocumento")));
+		cliente.setNumdocumento(request.getParameter("txtNumeroDocumento"));
+		cliente.setNumtelefono(request.getParameter("txtNumeroTelefono"));
+		cliente.setDireccion(request.getParameter("txtDireccion"));
+		cliente.setEstado(request.getParameter("cboEstado"));
+		cliente.setFecregistro(new java.util.Date());
+		
+		if(buscarCliente()){
+			cliente.setFecmodificacion(new java.util.Date());
+			clienteManager.updateByPrimaryKeySelective(cliente);
+		}else{
+			cliente.setFecregistro(new java.util.Date());
+			clienteManager.insertSelective(cliente);
+		}
+				
 		listarClientes();
 		return new ModelAndView("listarCliente", "lstCliente", getLstCliente());
 	}
@@ -83,10 +103,16 @@ public class ClienteController {
 		return new ModelAndView("listarCliente", "lstCliente", getLstCliente());
 	}
 	
-	public boolean buscarPersona(int tipoDocumento, String numeroDocumento){
+	public boolean buscarPersona(){
 		personaExample = new PersonaExample();
-		personaExample.createCriteria().andIddocumentoEqualTo(tipoDocumento).andNumdocumentoEqualTo(numeroDocumento);
+		personaExample.createCriteria().andIddocumentoEqualTo(persona.getIddocumento()).andNumdocumentoEqualTo(persona.getNumdocumento());
 		return personaManager.countByExample(personaExample) == 1; 
+	}
+	
+	public boolean buscarCliente(){
+		clienteExample = new ClienteExample();
+		clienteExample.createCriteria().andIddocumentoEqualTo(cliente.getIddocumento()).andNumdocumentoEqualTo(cliente.getNumdocumento());
+		return clienteManager.countByExample(clienteExample) == 1; 
 	}
 	
 	public void listarClientes(){
@@ -96,7 +122,25 @@ public class ClienteController {
 			lstCliente.get(i).setApepaterno(persona.getApepaterno());
 			lstCliente.get(i).setApematerno(persona.getApematerno());
 			lstCliente.get(i).setNombres(persona.getNombres());
+			
+			if(lstCliente.get(i).getIddocumento()==1) lstCliente.get(i).setDesdocumento("DNI");
+			else lstCliente.get(i).setDesdocumento("RUC");
 		}
+	}
+	
+	public void cargarDatosCliente(int idcliente){
+		
+		cliente = new Cliente();
+		persona = new Persona();
+		
+		cliente = clienteManager.selectByPrimaryKey(idcliente);
+		persona = personaManager.selectByPrimaryKey(cliente.getIddocumento(), cliente.getNumdocumento());
+		
+		cliente.setApepaterno(persona.getApepaterno());
+		cliente.setApematerno(persona.getApematerno());
+		cliente.setNombres(persona.getNombres());
+		
+		
 	}
 	
 	public ClienteManager getClienteManager() {
@@ -155,8 +199,11 @@ public class ClienteController {
 		this.lstCliente = lstCliente;
 	}
 
+	public ClienteExample getClienteExample() {
+		return clienteExample;
+	}
 
-
-	
-
+	public void setClienteExample(ClienteExample clienteExample) {
+		this.clienteExample = clienteExample;
+	}
 }

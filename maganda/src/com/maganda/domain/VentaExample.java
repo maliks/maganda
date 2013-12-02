@@ -905,6 +905,146 @@ public class VentaExample {
             addCriterion("FECMODIFICACION not between", value1, value2, "fecmodificacion");
             return (Criteria) this;
         }
+
+        public Criteria andUserregistroIsNull() {
+            addCriterion("USERREGISTRO is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserregistroIsNotNull() {
+            addCriterion("USERREGISTRO is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserregistroEqualTo(String value) {
+            addCriterion("USERREGISTRO =", value, "userregistro");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserregistroNotEqualTo(String value) {
+            addCriterion("USERREGISTRO <>", value, "userregistro");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserregistroGreaterThan(String value) {
+            addCriterion("USERREGISTRO >", value, "userregistro");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserregistroGreaterThanOrEqualTo(String value) {
+            addCriterion("USERREGISTRO >=", value, "userregistro");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserregistroLessThan(String value) {
+            addCriterion("USERREGISTRO <", value, "userregistro");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserregistroLessThanOrEqualTo(String value) {
+            addCriterion("USERREGISTRO <=", value, "userregistro");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserregistroLike(String value) {
+            addCriterion("USERREGISTRO like", value, "userregistro");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserregistroNotLike(String value) {
+            addCriterion("USERREGISTRO not like", value, "userregistro");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserregistroIn(List<String> values) {
+            addCriterion("USERREGISTRO in", values, "userregistro");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserregistroNotIn(List<String> values) {
+            addCriterion("USERREGISTRO not in", values, "userregistro");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserregistroBetween(String value1, String value2) {
+            addCriterion("USERREGISTRO between", value1, value2, "userregistro");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserregistroNotBetween(String value1, String value2) {
+            addCriterion("USERREGISTRO not between", value1, value2, "userregistro");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsermodificacionIsNull() {
+            addCriterion("USERMODIFICACION is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsermodificacionIsNotNull() {
+            addCriterion("USERMODIFICACION is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsermodificacionEqualTo(String value) {
+            addCriterion("USERMODIFICACION =", value, "usermodificacion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsermodificacionNotEqualTo(String value) {
+            addCriterion("USERMODIFICACION <>", value, "usermodificacion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsermodificacionGreaterThan(String value) {
+            addCriterion("USERMODIFICACION >", value, "usermodificacion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsermodificacionGreaterThanOrEqualTo(String value) {
+            addCriterion("USERMODIFICACION >=", value, "usermodificacion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsermodificacionLessThan(String value) {
+            addCriterion("USERMODIFICACION <", value, "usermodificacion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsermodificacionLessThanOrEqualTo(String value) {
+            addCriterion("USERMODIFICACION <=", value, "usermodificacion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsermodificacionLike(String value) {
+            addCriterion("USERMODIFICACION like", value, "usermodificacion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsermodificacionNotLike(String value) {
+            addCriterion("USERMODIFICACION not like", value, "usermodificacion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsermodificacionIn(List<String> values) {
+            addCriterion("USERMODIFICACION in", values, "usermodificacion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsermodificacionNotIn(List<String> values) {
+            addCriterion("USERMODIFICACION not in", values, "usermodificacion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsermodificacionBetween(String value1, String value2) {
+            addCriterion("USERMODIFICACION between", value1, value2, "usermodificacion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsermodificacionNotBetween(String value1, String value2) {
+            addCriterion("USERMODIFICACION not between", value1, value2, "usermodificacion");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

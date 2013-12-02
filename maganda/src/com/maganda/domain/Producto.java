@@ -37,6 +37,13 @@ public class Producto {
     private Date fecregistro;
 
     private Date fecmodificacion;
+    
+    private String desColor;
+    private String desMarca;
+    private String desCategoria;
+    private String desProveedor;
+    private String desDocTipCompra;
+    private String desEstado;
 
     public Integer getIdproducto() {
         return idproducto;
@@ -173,4 +180,52 @@ public class Producto {
     public void setFecmodificacion(Date fecmodificacion) {
         this.fecmodificacion = fecmodificacion;
     }
+
+	public String getDesColor() {
+		return desColor;
+	}
+
+	public void setDesColor(String desColor) {
+		this.desColor = desColor;
+	}
+
+	public String getDesMarca() {
+		return desMarca;
+	}
+
+	public void setDesMarca(String desMarca) {
+		this.desMarca = desMarca;
+	}
+
+	public String getDesCategoria() {
+		return desCategoria;
+	}
+
+	public void setDesCategoria(String desCategoria) {
+		this.desCategoria = desCategoria;
+	}
+
+	public String getDesProveedor() {
+		return desProveedor;
+	}
+
+	public void setDesProveedor(String desProveedor) {
+		this.desProveedor = desProveedor;
+	}
+
+	public String getDesDocTipCompra() {
+		return desDocTipCompra;
+	}
+
+	public void setDesDocTipCompra(String desDocTipCompra) {
+		this.desDocTipCompra = desDocTipCompra;
+	}
+
+	public String getDesEstado() {
+		return desEstado;
+	}
+
+	public void setDesEstado(String desEstado) {
+		this.desEstado = desEstado;
+	}
 }

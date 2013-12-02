@@ -30,6 +30,20 @@ public class Venta {
 
     private Date fecmodificacion;
 
+    private String userregistro;
+
+    private String usermodificacion;
+    
+    private String desDocVenta;
+
+    private String numDocCliente;
+
+    private String desDocCliente;
+
+    private String nomCliente;
+
+    private double monTotal;
+
     public Integer getIddocumento() {
         return iddocumento;
     }
@@ -133,4 +147,60 @@ public class Venta {
     public void setFecmodificacion(Date fecmodificacion) {
         this.fecmodificacion = fecmodificacion;
     }
+
+    public String getUserregistro() {
+        return userregistro;
+    }
+
+    public void setUserregistro(String userregistro) {
+        this.userregistro = userregistro == null ? null : userregistro.trim();
+    }
+
+    public String getUsermodificacion() {
+        return usermodificacion;
+    }
+
+    public void setUsermodificacion(String usermodificacion) {
+        this.usermodificacion = usermodificacion == null ? null : usermodificacion.trim();
+    }
+
+	public String getDesDocVenta() {
+		return desDocVenta;
+	}
+
+	public void setDesDocVenta(String desDocVenta) {
+		this.desDocVenta = desDocVenta;
+	}
+
+	public String getNumDocCliente() {
+		return numDocCliente;
+	}
+
+	public void setNumDocCliente(String numDocCliente) {
+		this.numDocCliente = numDocCliente;
+	}
+
+	public String getDesDocCliente() {
+		return desDocCliente;
+	}
+
+	public void setDesDocCliente(String desDocCliente) {
+		this.desDocCliente = desDocCliente;
+	}
+
+	public String getNomCliente() {
+		return nomCliente;
+	}
+
+	public void setNomCliente(String nomCliente) {
+		this.nomCliente = nomCliente;
+	}
+
+	public double getMonTotal() {
+		return monTotal;
+	}
+
+	public void setMonTotal(double monTotal) {
+		this.monTotal = monTotal;
+	}
 }
