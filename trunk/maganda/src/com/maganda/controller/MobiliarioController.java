@@ -1,6 +1,5 @@
 package com.maganda.controller;
 
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.text.DateFormat;
@@ -28,7 +27,12 @@ public class MobiliarioController {
 	
 	@RequestMapping("/registrarMobiliario")
 	public ModelAndView registroMobiliario(HttpServletRequest request, HttpServletResponse response) {
-		return new ModelAndView("registrarMobiliario", "", "");
+		return new ModelAndView("registrarMobiliario");
+	}
+	
+	@RequestMapping("/consultarMobiliario")
+	public ModelAndView consultarMobiliario(HttpServletRequest request, HttpServletResponse response) {
+		return new ModelAndView("modificarMobiliario","mobiliario",mobiliarioManager.selectByPrimaryKey(Integer.parseInt(request.getParameter("idmobiliario"))));
 	}
 
 	@RequestMapping("/grabarMobiliario")
@@ -36,17 +40,24 @@ public class MobiliarioController {
 		
 		mobiliario = new Mobiliario();
 		
+		if(request.getParameter("txtIdMobiliario")!=null) mobiliario.setIdmobiliario(Integer.parseInt(request.getParameter("txtIdMobiliario")));
+		
 		mobiliario.setNombre(request.getParameter("txtNombre"));
 		mobiliario.setCantidad(Integer.parseInt(request.getParameter("txtCantidad")));
 		mobiliario.setDescripcion(request.getParameter("txtDescripcion"));
 		mobiliario.setFeccompra(stringToDate(request.getParameter("fecRegistroCompra")));
 		mobiliario.setMonto(new BigDecimal(Double.parseDouble(request.getParameter("txtMonto"))));
 		mobiliario.setEstado(request.getParameter("cboEstado"));
-		mobiliario.setFecregistro(new java.util.Date());
 		
-		mobiliarioManager.insertSelective(mobiliario);
+		if(mobiliario.getIdmobiliario()!=null){
+			mobiliario.setFecmodificacion(new java.util.Date());
+			mobiliarioManager.updateByPrimaryKeySelective(mobiliario);
+		}else{
+			mobiliario.setFecregistro(new java.util.Date());
+			mobiliarioManager.insertSelective(mobiliario);
+		}
 		
-		return new ModelAndView("nuevoEmpleado", "", "");
+		return new ModelAndView("listarMobiliario", "lstMobiliario", mobiliarioManager.selectByExample(null));
 	}
 	
 	@RequestMapping("/eliminarMobiliario")

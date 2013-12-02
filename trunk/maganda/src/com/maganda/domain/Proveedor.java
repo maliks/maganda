@@ -18,6 +18,14 @@ public class Proveedor {
     private Date fecregistro;
 
     private Date fecmodificacion;
+    
+    private String apepaterno;
+
+	private String apematerno;
+
+	private String nombres;
+
+	private String desdocumento;
 
     public Integer getIdproveedor() {
         return idproveedor;
@@ -82,4 +90,36 @@ public class Proveedor {
     public void setFecmodificacion(Date fecmodificacion) {
         this.fecmodificacion = fecmodificacion;
     }
+
+	public String getApepaterno() {
+		return apepaterno;
+	}
+
+	public void setApepaterno(String apepaterno) {
+		this.apepaterno = apepaterno;
+	}
+
+	public String getApematerno() {
+		return apematerno;
+	}
+
+	public void setApematerno(String apematerno) {
+		this.apematerno = apematerno;
+	}
+
+	public String getNombres() {
+		return nombres;
+	}
+
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
+	}
+
+	public String getDesdocumento() {
+		return desdocumento;
+	}
+
+	public void setDesdocumento(String desdocumento) {
+		this.desdocumento = desdocumento;
+	}
 }
