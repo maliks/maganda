@@ -12,6 +12,8 @@ public class Marca {
     private Date fecregistro;
 
     private Date fecmodificacion;
+    
+    private String desEstado;
 
     public Integer getIdmarca() {
         return idmarca;
@@ -52,4 +54,12 @@ public class Marca {
     public void setFecmodificacion(Date fecmodificacion) {
         this.fecmodificacion = fecmodificacion;
     }
+
+	public String getDesEstado() {
+		return desEstado;
+	}
+
+	public void setDesEstado(String desEstado) {
+		this.desEstado = desEstado;
+	}
 }
