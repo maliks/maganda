@@ -82,8 +82,8 @@
 				<td align="right">Estado:</td>
 				<td align="left">
 					<select name="cboEstado" id="cboEstado" dojoType="dijit.form.FilteringSelect" autocomplete="true" required="true">
-						<option value="Disponible" selected="selected">DISPONIBLE</option>
-						<option value="No disponible">NO DISPONIBLE</option>
+						<option value="1" selected="selected">Activo</option>
+						<option value="0">Baja</option>
 				</select>
 				</td>
 

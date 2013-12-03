@@ -33,7 +33,7 @@
 
 					<td align="center">${marca.idmarca}</td>
 					<td align="left">${marca.nombre}</td>
-					<td align="left">${marca.estado}</td>
+					<td align="left">${marca.desEstado}</td>
 					<td align="center"><fmt:formatDate pattern="dd/MM/yyyy" value="${marca.fecregistro}" /></td>
 					<td align="center"><a href="<c:url value="/consultarMarca.mgd?idmarca="/>${marca.idmarca}">Modificar</a></td>
 				</tr>
