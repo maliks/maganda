@@ -1,13 +1,18 @@
 package com.maganda.controller;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.maganda.domain.Marca;
 import com.maganda.logic.MarcaManager;
 
@@ -15,12 +20,13 @@ import com.maganda.logic.MarcaManager;
 public class MarcaController {
 	
 	private MarcaManager marcaManager;
-	
+	private List<Marca> lstMarca;
 	private Marca marca;
 	
 	@RequestMapping("/listarMarca")
 	public ModelAndView listarMarca(HttpServletRequest request, HttpServletResponse response) {
-		return new ModelAndView("listarMarca", "lstMarca", marcaManager.selectByExample(null));
+		listarMarcas();
+		return new ModelAndView("listarMarca", "lstMarca", getLstMarca());
 	}
 	
 	@RequestMapping("/registrarMarca")
@@ -52,13 +58,27 @@ public class MarcaController {
 			marcaManager.insertSelective(marca);
 		}
 		
-		return new ModelAndView("listarMarca", "lstMarca", marcaManager.selectByExample(null));
+		listarMarcas();
+		return new ModelAndView("listarMarca", "lstMarca", getLstMarca());
 	}
 	
 	@RequestMapping("/eliminarMarca")
 	public ModelAndView eliminarMarca(HttpServletRequest request, HttpServletResponse response) {
 		marcaManager.deleteByPrimaryKey(Integer.parseInt(request.getParameter("idmarca")));
-		return new ModelAndView("listarMarca", "lstMarca", marcaManager.selectByExample(null));
+		listarMarcas();
+		return new ModelAndView("listarMarca", "lstMarca", getLstMarca());
+	}
+	
+	public void listarMarcas(){
+		
+		lstMarca = new ArrayList<Marca>();
+		lstMarca = marcaManager.selectByExample(null);
+		
+		for (int i = 0; i < lstMarca.size(); i++) {
+			if("1".equals(lstMarca.get(i).getEstado())) lstMarca.get(i).setDesEstado("Activo");
+			else lstMarca.get(i).setDesEstado("Baja");
+		}
+		
 	}
 	
 	public MarcaManager getMarcaManager() {
@@ -81,6 +101,14 @@ public class MarcaController {
 	public Date stringToDate(String date) throws Exception{
 		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		return formatter.parse(date);
+	}
+
+	public List<Marca> getLstMarca() {
+		return lstMarca;
+	}
+
+	public void setLstMarca(List<Marca> lstMarca) {
+		this.lstMarca = lstMarca;
 	}
 
 }
