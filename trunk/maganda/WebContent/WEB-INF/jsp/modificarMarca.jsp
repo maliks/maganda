@@ -67,6 +67,20 @@
 		<table width="400" border="0" align="center">
 			
 			<tr>
+				<td align="right">Identificador de la marcar:</td>
+				<td align="left">
+					<input
+						type="text"
+						name="txtIdMarca"
+						id="txtIdMarca"
+						required="true"
+						value="<c:out value="${marca.idmarca}"/>"
+						readonly="readonly"
+						dojoType="dijit.form.ValidationTextBox"
+					/>
+				</td>
+			</tr>
+			<tr>
 				<td align="right">Nombre:</td>
 				<td align="left">
 					<input
@@ -87,8 +101,8 @@
 				<td align="right">Estado:</td>
 				<td align="left">
 					<select name="cboEstado" id="cboEstado" dojoType="dijit.form.FilteringSelect" autocomplete="true" required="true">
-						<option value="1" <c:if test="${marca.estado=='DISPONIBLE'}">selected="selected"</c:if>>DISPONIBLE</option>
-						<option value="0" <c:if test="${marca.estado=='NO DISPONIBLE'}">selected="selected"</c:if>>NO DISPONIBLE</option>
+						<option value="1" <c:if test="${marca.estado=='1'}">selected="selected"</c:if>>Activo</option>
+						<option value="0" <c:if test="${marca.estado=='0'}">selected="selected"</c:if>>Baja</option>
 				</select>
 				</td>
 
