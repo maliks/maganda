@@ -3,12 +3,20 @@
 <mapper namespace="com.maganda.dao.ProductoMapper" >
   <resultMap id="BaseResultMap" type="com.maganda.domain.Producto" >
     <id column="IDPRODUCTO" property="idproducto" jdbcType="INTEGER" />
+    <result column="CODPRODUCTO" property="codproducto" jdbcType="VARCHAR" />
     <result column="NOMBRE" property="nombre" jdbcType="VARCHAR" />
     <result column="DESCRIPCION" property="descripcion" jdbcType="VARCHAR" />
     <result column="TALLA" property="talla" jdbcType="CHAR" />
     <result column="IDCOLOR" property="idcolor" jdbcType="INTEGER" />
-    <result column="IDSUBCATEGORIA" property="idsubcategoria" jdbcType="INTEGER" />
+    <result column="IDCATEGORIA" property="idcategoria" jdbcType="INTEGER" />
     <result column="IDMARCA" property="idmarca" jdbcType="INTEGER" />
+    <result column="IDDOCUMENTO" property="iddocumento" jdbcType="INTEGER" />
+    <result column="NUMCOMPRA" property="numcompra" jdbcType="VARCHAR" />
+    <result column="IDPROVEEDOR" property="idproveedor" jdbcType="INTEGER" />
+    <result column="MONCOSTO" property="moncosto" jdbcType="DECIMAL" />
+    <result column="MONVENTA" property="monventa" jdbcType="DECIMAL" />
+    <result column="FECCOMPRA" property="feccompra" jdbcType="TIMESTAMP" />
+    <result column="ESTADO" property="estado" jdbcType="CHAR" />
     <result column="FECREGISTRO" property="fecregistro" jdbcType="TIMESTAMP" />
     <result column="FECMODIFICACION" property="fecmodificacion" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -71,7 +79,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    IDPRODUCTO, NOMBRE, DESCRIPCION, TALLA, IDCOLOR, IDSUBCATEGORIA, IDMARCA, FECREGISTRO, 
+    IDPRODUCTO, CODPRODUCTO, NOMBRE, DESCRIPCION, TALLA, IDCOLOR, IDCATEGORIA, IDMARCA, 
+    IDDOCUMENTO, NUMCOMPRA, IDPROVEEDOR, MONCOSTO, MONVENTA, FECCOMPRA, ESTADO, FECREGISTRO, 
     FECMODIFICACION
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maganda.domain.ProductoExample" >
@@ -105,20 +114,27 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.maganda.domain.Producto" >
-    insert into producto (IDPRODUCTO, NOMBRE, DESCRIPCION, 
-      TALLA, IDCOLOR, IDSUBCATEGORIA, 
-      IDMARCA, FECREGISTRO, FECMODIFICACION
-      )
-    values (#{idproducto,jdbcType=INTEGER}, #{nombre,jdbcType=VARCHAR}, #{descripcion,jdbcType=VARCHAR}, 
-      #{talla,jdbcType=CHAR}, #{idcolor,jdbcType=INTEGER}, #{idsubcategoria,jdbcType=INTEGER}, 
-      #{idmarca,jdbcType=INTEGER}, #{fecregistro,jdbcType=TIMESTAMP}, #{fecmodificacion,jdbcType=TIMESTAMP}
-      )
+    insert into producto (IDPRODUCTO, CODPRODUCTO, NOMBRE, 
+      DESCRIPCION, TALLA, IDCOLOR, 
+      IDCATEGORIA, IDMARCA, IDDOCUMENTO, 
+      NUMCOMPRA, IDPROVEEDOR, MONCOSTO, 
+      MONVENTA, FECCOMPRA, ESTADO, 
+      FECREGISTRO, FECMODIFICACION)
+    values (#{idproducto,jdbcType=INTEGER}, #{codproducto,jdbcType=VARCHAR}, #{nombre,jdbcType=VARCHAR}, 
+      #{descripcion,jdbcType=VARCHAR}, #{talla,jdbcType=CHAR}, #{idcolor,jdbcType=INTEGER}, 
+      #{idcategoria,jdbcType=INTEGER}, #{idmarca,jdbcType=INTEGER}, #{iddocumento,jdbcType=INTEGER}, 
+      #{numcompra,jdbcType=VARCHAR}, #{idproveedor,jdbcType=INTEGER}, #{moncosto,jdbcType=DECIMAL}, 
+      #{monventa,jdbcType=DECIMAL}, #{feccompra,jdbcType=TIMESTAMP}, #{estado,jdbcType=CHAR}, 
+      #{fecregistro,jdbcType=TIMESTAMP}, #{fecmodificacion,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.maganda.domain.Producto" >
     insert into producto
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="idproducto != null" >
         IDPRODUCTO,
+      </if>
+      <if test="codproducto != null" >
+        CODPRODUCTO,
       </if>
       <if test="nombre != null" >
         NOMBRE,
@@ -132,11 +148,32 @@
       <if test="idcolor != null" >
         IDCOLOR,
       </if>
-      <if test="idsubcategoria != null" >
-        IDSUBCATEGORIA,
+      <if test="idcategoria != null" >
+        IDCATEGORIA,
       </if>
       <if test="idmarca != null" >
         IDMARCA,
+      </if>
+      <if test="iddocumento != null" >
+        IDDOCUMENTO,
+      </if>
+      <if test="numcompra != null" >
+        NUMCOMPRA,
+      </if>
+      <if test="idproveedor != null" >
+        IDPROVEEDOR,
+      </if>
+      <if test="moncosto != null" >
+        MONCOSTO,
+      </if>
+      <if test="monventa != null" >
+        MONVENTA,
+      </if>
+      <if test="feccompra != null" >
+        FECCOMPRA,
+      </if>
+      <if test="estado != null" >
+        ESTADO,
       </if>
       <if test="fecregistro != null" >
         FECREGISTRO,
@@ -148,6 +185,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="idproducto != null" >
         #{idproducto,jdbcType=INTEGER},
+      </if>
+      <if test="codproducto != null" >
+        #{codproducto,jdbcType=VARCHAR},
       </if>
       <if test="nombre != null" >
         #{nombre,jdbcType=VARCHAR},
@@ -161,11 +201,32 @@
       <if test="idcolor != null" >
         #{idcolor,jdbcType=INTEGER},
       </if>
-      <if test="idsubcategoria != null" >
-        #{idsubcategoria,jdbcType=INTEGER},
+      <if test="idcategoria != null" >
+        #{idcategoria,jdbcType=INTEGER},
       </if>
       <if test="idmarca != null" >
         #{idmarca,jdbcType=INTEGER},
+      </if>
+      <if test="iddocumento != null" >
+        #{iddocumento,jdbcType=INTEGER},
+      </if>
+      <if test="numcompra != null" >
+        #{numcompra,jdbcType=VARCHAR},
+      </if>
+      <if test="idproveedor != null" >
+        #{idproveedor,jdbcType=INTEGER},
+      </if>
+      <if test="moncosto != null" >
+        #{moncosto,jdbcType=DECIMAL},
+      </if>
+      <if test="monventa != null" >
+        #{monventa,jdbcType=DECIMAL},
+      </if>
+      <if test="feccompra != null" >
+        #{feccompra,jdbcType=TIMESTAMP},
+      </if>
+      <if test="estado != null" >
+        #{estado,jdbcType=CHAR},
       </if>
       <if test="fecregistro != null" >
         #{fecregistro,jdbcType=TIMESTAMP},
@@ -187,6 +248,9 @@
       <if test="record.idproducto != null" >
         IDPRODUCTO = #{record.idproducto,jdbcType=INTEGER},
       </if>
+      <if test="record.codproducto != null" >
+        CODPRODUCTO = #{record.codproducto,jdbcType=VARCHAR},
+      </if>
       <if test="record.nombre != null" >
         NOMBRE = #{record.nombre,jdbcType=VARCHAR},
       </if>
@@ -199,11 +263,32 @@
       <if test="record.idcolor != null" >
         IDCOLOR = #{record.idcolor,jdbcType=INTEGER},
       </if>
-      <if test="record.idsubcategoria != null" >
-        IDSUBCATEGORIA = #{record.idsubcategoria,jdbcType=INTEGER},
+      <if test="record.idcategoria != null" >
+        IDCATEGORIA = #{record.idcategoria,jdbcType=INTEGER},
       </if>
       <if test="record.idmarca != null" >
         IDMARCA = #{record.idmarca,jdbcType=INTEGER},
+      </if>
+      <if test="record.iddocumento != null" >
+        IDDOCUMENTO = #{record.iddocumento,jdbcType=INTEGER},
+      </if>
+      <if test="record.numcompra != null" >
+        NUMCOMPRA = #{record.numcompra,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idproveedor != null" >
+        IDPROVEEDOR = #{record.idproveedor,jdbcType=INTEGER},
+      </if>
+      <if test="record.moncosto != null" >
+        MONCOSTO = #{record.moncosto,jdbcType=DECIMAL},
+      </if>
+      <if test="record.monventa != null" >
+        MONVENTA = #{record.monventa,jdbcType=DECIMAL},
+      </if>
+      <if test="record.feccompra != null" >
+        FECCOMPRA = #{record.feccompra,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.estado != null" >
+        ESTADO = #{record.estado,jdbcType=CHAR},
       </if>
       <if test="record.fecregistro != null" >
         FECREGISTRO = #{record.fecregistro,jdbcType=TIMESTAMP},
@@ -219,12 +304,20 @@
   <update id="updateByExample" parameterType="map" >
     update producto
     set IDPRODUCTO = #{record.idproducto,jdbcType=INTEGER},
+      CODPRODUCTO = #{record.codproducto,jdbcType=VARCHAR},
       NOMBRE = #{record.nombre,jdbcType=VARCHAR},
       DESCRIPCION = #{record.descripcion,jdbcType=VARCHAR},
       TALLA = #{record.talla,jdbcType=CHAR},
       IDCOLOR = #{record.idcolor,jdbcType=INTEGER},
-      IDSUBCATEGORIA = #{record.idsubcategoria,jdbcType=INTEGER},
+      IDCATEGORIA = #{record.idcategoria,jdbcType=INTEGER},
       IDMARCA = #{record.idmarca,jdbcType=INTEGER},
+      IDDOCUMENTO = #{record.iddocumento,jdbcType=INTEGER},
+      NUMCOMPRA = #{record.numcompra,jdbcType=VARCHAR},
+      IDPROVEEDOR = #{record.idproveedor,jdbcType=INTEGER},
+      MONCOSTO = #{record.moncosto,jdbcType=DECIMAL},
+      MONVENTA = #{record.monventa,jdbcType=DECIMAL},
+      FECCOMPRA = #{record.feccompra,jdbcType=TIMESTAMP},
+      ESTADO = #{record.estado,jdbcType=CHAR},
       FECREGISTRO = #{record.fecregistro,jdbcType=TIMESTAMP},
       FECMODIFICACION = #{record.fecmodificacion,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -234,6 +327,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.maganda.domain.Producto" >
     update producto
     <set >
+      <if test="codproducto != null" >
+        CODPRODUCTO = #{codproducto,jdbcType=VARCHAR},
+      </if>
       <if test="nombre != null" >
         NOMBRE = #{nombre,jdbcType=VARCHAR},
       </if>
@@ -246,11 +342,32 @@
       <if test="idcolor != null" >
         IDCOLOR = #{idcolor,jdbcType=INTEGER},
       </if>
-      <if test="idsubcategoria != null" >
-        IDSUBCATEGORIA = #{idsubcategoria,jdbcType=INTEGER},
+      <if test="idcategoria != null" >
+        IDCATEGORIA = #{idcategoria,jdbcType=INTEGER},
       </if>
       <if test="idmarca != null" >
         IDMARCA = #{idmarca,jdbcType=INTEGER},
+      </if>
+      <if test="iddocumento != null" >
+        IDDOCUMENTO = #{iddocumento,jdbcType=INTEGER},
+      </if>
+      <if test="numcompra != null" >
+        NUMCOMPRA = #{numcompra,jdbcType=VARCHAR},
+      </if>
+      <if test="idproveedor != null" >
+        IDPROVEEDOR = #{idproveedor,jdbcType=INTEGER},
+      </if>
+      <if test="moncosto != null" >
+        MONCOSTO = #{moncosto,jdbcType=DECIMAL},
+      </if>
+      <if test="monventa != null" >
+        MONVENTA = #{monventa,jdbcType=DECIMAL},
+      </if>
+      <if test="feccompra != null" >
+        FECCOMPRA = #{feccompra,jdbcType=TIMESTAMP},
+      </if>
+      <if test="estado != null" >
+        ESTADO = #{estado,jdbcType=CHAR},
       </if>
       <if test="fecregistro != null" >
         FECREGISTRO = #{fecregistro,jdbcType=TIMESTAMP},
@@ -263,12 +380,20 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.maganda.domain.Producto" >
     update producto
-    set NOMBRE = #{nombre,jdbcType=VARCHAR},
+    set CODPRODUCTO = #{codproducto,jdbcType=VARCHAR},
+      NOMBRE = #{nombre,jdbcType=VARCHAR},
       DESCRIPCION = #{descripcion,jdbcType=VARCHAR},
       TALLA = #{talla,jdbcType=CHAR},
       IDCOLOR = #{idcolor,jdbcType=INTEGER},
-      IDSUBCATEGORIA = #{idsubcategoria,jdbcType=INTEGER},
+      IDCATEGORIA = #{idcategoria,jdbcType=INTEGER},
       IDMARCA = #{idmarca,jdbcType=INTEGER},
+      IDDOCUMENTO = #{iddocumento,jdbcType=INTEGER},
+      NUMCOMPRA = #{numcompra,jdbcType=VARCHAR},
+      IDPROVEEDOR = #{idproveedor,jdbcType=INTEGER},
+      MONCOSTO = #{moncosto,jdbcType=DECIMAL},
+      MONVENTA = #{monventa,jdbcType=DECIMAL},
+      FECCOMPRA = #{feccompra,jdbcType=TIMESTAMP},
+      ESTADO = #{estado,jdbcType=CHAR},
       FECREGISTRO = #{fecregistro,jdbcType=TIMESTAMP},
       FECMODIFICACION = #{fecmodificacion,jdbcType=TIMESTAMP}
     where IDPRODUCTO = #{idproducto,jdbcType=INTEGER}

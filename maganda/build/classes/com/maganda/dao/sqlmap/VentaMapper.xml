@@ -3,7 +3,7 @@
 <mapper namespace="com.maganda.dao.VentaMapper" >
   <resultMap id="BaseResultMap" type="com.maganda.domain.Venta" >
     <id column="IDDOCUMENTO" property="iddocumento" jdbcType="INTEGER" />
-    <id column="NUMVENTA" property="numventa" jdbcType="INTEGER" />
+    <id column="NUMVENTA" property="numventa" jdbcType="VARCHAR" />
     <result column="IDCLIENTE" property="idcliente" jdbcType="INTEGER" />
     <result column="FECVENTA" property="fecventa" jdbcType="TIMESTAMP" />
     <result column="FECENTREGA" property="fecentrega" jdbcType="TIMESTAMP" />
@@ -15,6 +15,8 @@
     <result column="MONIGV" property="monigv" jdbcType="DECIMAL" />
     <result column="FECREGISTRO" property="fecregistro" jdbcType="TIMESTAMP" />
     <result column="FECMODIFICACION" property="fecmodificacion" jdbcType="TIMESTAMP" />
+    <result column="USERREGISTRO" property="userregistro" jdbcType="VARCHAR" />
+    <result column="USERMODIFICACION" property="usermodificacion" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -76,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List" >
     IDDOCUMENTO, NUMVENTA, IDCLIENTE, FECVENTA, FECENTREGA, FECPAGO, ESTADO, MONVENTA, 
-    MONDESCUENTO, MONADELANTO, MONIGV, FECREGISTRO, FECMODIFICACION
+    MONDESCUENTO, MONADELANTO, MONIGV, FECREGISTRO, FECMODIFICACION, USERREGISTRO, USERMODIFICACION
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.maganda.domain.VentaExample" >
     select
@@ -97,12 +99,12 @@
     <include refid="Base_Column_List" />
     from venta
     where IDDOCUMENTO = #{iddocumento,jdbcType=INTEGER}
-      and NUMVENTA = #{numventa,jdbcType=INTEGER}
+      and NUMVENTA = #{numventa,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="map" >
     delete from venta
     where IDDOCUMENTO = #{iddocumento,jdbcType=INTEGER}
-      and NUMVENTA = #{numventa,jdbcType=INTEGER}
+      and NUMVENTA = #{numventa,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.maganda.domain.VentaExample" >
     delete from venta
@@ -115,12 +117,14 @@
       FECVENTA, FECENTREGA, FECPAGO, 
       ESTADO, MONVENTA, MONDESCUENTO, 
       MONADELANTO, MONIGV, FECREGISTRO, 
-      FECMODIFICACION)
-    values (#{iddocumento,jdbcType=INTEGER}, #{numventa,jdbcType=INTEGER}, #{idcliente,jdbcType=INTEGER}, 
+      FECMODIFICACION, USERREGISTRO, USERMODIFICACION
+      )
+    values (#{iddocumento,jdbcType=INTEGER}, #{numventa,jdbcType=VARCHAR}, #{idcliente,jdbcType=INTEGER}, 
       #{fecventa,jdbcType=TIMESTAMP}, #{fecentrega,jdbcType=TIMESTAMP}, #{fecpago,jdbcType=TIMESTAMP}, 
       #{estado,jdbcType=CHAR}, #{monventa,jdbcType=DECIMAL}, #{mondescuento,jdbcType=DECIMAL}, 
       #{monadelanto,jdbcType=DECIMAL}, #{monigv,jdbcType=DECIMAL}, #{fecregistro,jdbcType=TIMESTAMP}, 
-      #{fecmodificacion,jdbcType=TIMESTAMP})
+      #{fecmodificacion,jdbcType=TIMESTAMP}, #{userregistro,jdbcType=VARCHAR}, #{usermodificacion,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.maganda.domain.Venta" >
     insert into venta
@@ -164,13 +168,19 @@
       <if test="fecmodificacion != null" >
         FECMODIFICACION,
       </if>
+      <if test="userregistro != null" >
+        USERREGISTRO,
+      </if>
+      <if test="usermodificacion != null" >
+        USERMODIFICACION,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="iddocumento != null" >
         #{iddocumento,jdbcType=INTEGER},
       </if>
       <if test="numventa != null" >
-        #{numventa,jdbcType=INTEGER},
+        #{numventa,jdbcType=VARCHAR},
       </if>
       <if test="idcliente != null" >
         #{idcliente,jdbcType=INTEGER},
@@ -205,6 +215,12 @@
       <if test="fecmodificacion != null" >
         #{fecmodificacion,jdbcType=TIMESTAMP},
       </if>
+      <if test="userregistro != null" >
+        #{userregistro,jdbcType=VARCHAR},
+      </if>
+      <if test="usermodificacion != null" >
+        #{usermodificacion,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.maganda.domain.VentaExample" resultType="java.lang.Integer" >
@@ -220,7 +236,7 @@
         IDDOCUMENTO = #{record.iddocumento,jdbcType=INTEGER},
       </if>
       <if test="record.numventa != null" >
-        NUMVENTA = #{record.numventa,jdbcType=INTEGER},
+        NUMVENTA = #{record.numventa,jdbcType=VARCHAR},
       </if>
       <if test="record.idcliente != null" >
         IDCLIENTE = #{record.idcliente,jdbcType=INTEGER},
@@ -255,6 +271,12 @@
       <if test="record.fecmodificacion != null" >
         FECMODIFICACION = #{record.fecmodificacion,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.userregistro != null" >
+        USERREGISTRO = #{record.userregistro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usermodificacion != null" >
+        USERMODIFICACION = #{record.usermodificacion,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -263,7 +285,7 @@
   <update id="updateByExample" parameterType="map" >
     update venta
     set IDDOCUMENTO = #{record.iddocumento,jdbcType=INTEGER},
-      NUMVENTA = #{record.numventa,jdbcType=INTEGER},
+      NUMVENTA = #{record.numventa,jdbcType=VARCHAR},
       IDCLIENTE = #{record.idcliente,jdbcType=INTEGER},
       FECVENTA = #{record.fecventa,jdbcType=TIMESTAMP},
       FECENTREGA = #{record.fecentrega,jdbcType=TIMESTAMP},
@@ -274,7 +296,9 @@
       MONADELANTO = #{record.monadelanto,jdbcType=DECIMAL},
       MONIGV = #{record.monigv,jdbcType=DECIMAL},
       FECREGISTRO = #{record.fecregistro,jdbcType=TIMESTAMP},
-      FECMODIFICACION = #{record.fecmodificacion,jdbcType=TIMESTAMP}
+      FECMODIFICACION = #{record.fecmodificacion,jdbcType=TIMESTAMP},
+      USERREGISTRO = #{record.userregistro,jdbcType=VARCHAR},
+      USERMODIFICACION = #{record.usermodificacion,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -315,9 +339,15 @@
       <if test="fecmodificacion != null" >
         FECMODIFICACION = #{fecmodificacion,jdbcType=TIMESTAMP},
       </if>
+      <if test="userregistro != null" >
+        USERREGISTRO = #{userregistro,jdbcType=VARCHAR},
+      </if>
+      <if test="usermodificacion != null" >
+        USERMODIFICACION = #{usermodificacion,jdbcType=VARCHAR},
+      </if>
     </set>
     where IDDOCUMENTO = #{iddocumento,jdbcType=INTEGER}
-      and NUMVENTA = #{numventa,jdbcType=INTEGER}
+      and NUMVENTA = #{numventa,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.maganda.domain.Venta" >
     update venta
@@ -331,8 +361,10 @@
       MONADELANTO = #{monadelanto,jdbcType=DECIMAL},
       MONIGV = #{monigv,jdbcType=DECIMAL},
       FECREGISTRO = #{fecregistro,jdbcType=TIMESTAMP},
-      FECMODIFICACION = #{fecmodificacion,jdbcType=TIMESTAMP}
+      FECMODIFICACION = #{fecmodificacion,jdbcType=TIMESTAMP},
+      USERREGISTRO = #{userregistro,jdbcType=VARCHAR},
+      USERMODIFICACION = #{usermodificacion,jdbcType=VARCHAR}
     where IDDOCUMENTO = #{iddocumento,jdbcType=INTEGER}
-      and NUMVENTA = #{numventa,jdbcType=INTEGER}
+      and NUMVENTA = #{numventa,jdbcType=VARCHAR}
   </update>
 </mapper>
