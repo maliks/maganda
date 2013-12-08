@@ -88,10 +88,11 @@
 						id="txtCantidad"
 						required="true"
 						trim="true"
-						regExp="^[1-9]\d+$"
-						maxlength="5"
-						dojoType="dijit.form.ValidationTextBox"
-					/>
+						maxlength="9"
+						dojoType="dijit.form.ValidationTextBox"	/>
+						<!-- regExp="^[0-9]\d+$" -->
+						
+				
 				</td>
 				<tr>
 				<td align="right">Descripcion:</td>

@@ -43,7 +43,7 @@
 				<th align="center">Total</th>
 				<th align="center">Fec. Venta</th>
 				<th align="center">Fec. Registro</th>
-				<th align="center">Ver detalle</th>
+				<th align="center">Reportes</th>
 				<th align="center">Eliminar</th>
 			</thead>
 			<c:forEach var="venta" items="${ventaMap.lstVenta}">
@@ -59,7 +59,7 @@
 					<td align="right"><fmt:formatNumber type="number" pattern="###,##0.00" value="${venta.monTotal}" /></td>
 					<td align="center"><fmt:formatDate pattern="dd/MM/yyyy" value="${venta.fecventa}" /></td>
 					<td align="center"><fmt:formatDate pattern="dd/MM/yyyy" value="${venta.fecregistro}" /></td>
-					<td align="center"><a href="<c:url value="/consultarVenta.mgd?iddocumento="/>${venta.iddocumento}&numventa=${venta.numventa}">Ver detalle</a></td>
+					<td align="center"><!--<a href="<c:url value="/consultarVenta.mgd?iddocumento="/>${venta.iddocumento}&numventa=${venta.numventa}">-->Imprimir</a></td>
 					<td align="center"><a href="<c:url value="/eliminarVenta.mgd?iddocumento="/>${venta.iddocumento}&numventa=${venta.numventa}">Eliminar</a></td>
 				</tr>
 			</c:forEach>

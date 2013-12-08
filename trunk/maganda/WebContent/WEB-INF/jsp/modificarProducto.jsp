@@ -288,7 +288,7 @@
 			<tr>
 				<td align="right">Fecha de Compra:</td>
 				<td align="left">
-					<input type="text" name="fecRegistroCompra" id="fecRegistroCompra" dojoType="dijit.form.DateTextBox" required="true" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${mapProducto.producto.feccompra}" />" />
+					<input readonly="readonly" type="text" name="fecRegistroCompra" id="fecRegistroCompra" dojoType="dijit.form.DateTextBox" required="true" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${mapProducto.producto.feccompra}" />" />
 				</td>
 			</tr>
 		</table>
