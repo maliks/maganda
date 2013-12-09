@@ -59,7 +59,7 @@
 					<td align="right"><fmt:formatNumber type="number" pattern="###,##0.00" value="${venta.monTotal}" /></td>
 					<td align="center"><fmt:formatDate pattern="dd/MM/yyyy" value="${venta.fecventa}" /></td>
 					<td align="center"><fmt:formatDate pattern="dd/MM/yyyy" value="${venta.fecregistro}" /></td>
-					<td align="center"><!--<a href="<c:url value="/consultarVenta.mgd?iddocumento="/>${venta.iddocumento}&numventa=${venta.numventa}">-->Imprimir</a></td>
+					<td align="center"><a href="<c:url value="/generadorreportes?reporte=VentaUnitaria&iddocumento="/>${venta.iddocumento}&numdocumento=${venta.numventa}">Imprimir</a></td>
 					<td align="center"><a href="<c:url value="/eliminarVenta.mgd?iddocumento="/>${venta.iddocumento}&numventa=${venta.numventa}">Eliminar</a></td>
 				</tr>
 			</c:forEach>

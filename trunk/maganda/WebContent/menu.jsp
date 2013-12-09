@@ -43,7 +43,7 @@
 	<tr>
 		<td><a href="${pageContext.request.contextPath}/listarMobiliario.mgd"><img src="<c:url value="/img/mobiliario.png"/>" height="100" width="100" style="border: 0"></a></td>
 		<td><div class="itemMenu">Mobiliarios</div></td>
-		<td><!--<a href="${pageContext.request.contextPath}/listaReporte.mgd">--><img src="<c:url value="/img/reporte.png"/>" height="100" width="100" style="border: 0"></a></td>
+		<td><a href="${pageContext.request.contextPath}/listaReporte.mgd"><img src="<c:url value="/img/reporte.png"/>" height="100" width="100" style="border: 0"></a></td>
 		<td><div class="itemMenu">Reportes</div></td>
 	</tr>
 </table>
