@@ -190,6 +190,7 @@ public class ProductoController {
 		
 		colorExample = new ColorExample();
 		colorExample.setOrderByClause( "NOMBRE" );
+		colorExample.createCriteria().andEstadoEqualTo("1");
 		
 		lstColor = colorManager.selectByExample(colorExample);
 		
@@ -201,6 +202,7 @@ public class ProductoController {
 		
 		marcaExample = new MarcaExample();
 		marcaExample.setOrderByClause( "NOMBRE" );
+		marcaExample.createCriteria().andEstadoEqualTo("1");
 		
 		lstMarca = marcaManager.selectByExample(marcaExample);
 		
@@ -221,7 +223,11 @@ public class ProductoController {
 	public void listarProveedores(){
 		
 		lstProveedor = new ArrayList<Proveedor>();
-		lstProveedor = proveedorManager.selectByExample(null);
+		
+		proveedorExample = new ProveedorExample();
+		proveedorExample.createCriteria().andEstadoEqualTo("1");
+		
+		lstProveedor = proveedorManager.selectByExample(proveedorExample);
 		
 		for (int i = 0; i < lstProveedor.size(); i++) {
 			
